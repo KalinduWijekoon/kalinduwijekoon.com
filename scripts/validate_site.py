@@ -58,7 +58,13 @@ if not headers.exists():
     errors.append("_headers is missing.")
 else:
     header_text = headers.read_text(encoding="utf-8")
-    for required in ("Content-Security-Policy:", "X-Content-Type-Options:", "Referrer-Policy:", "Permissions-Policy:"):
+    required_headers = (
+        "Content-Security-Policy:",
+        "X-Content-Type-Options:",
+        "Referrer-Policy:",
+        "Permissions-Policy:",
+    )
+    for required in required_headers:
         if required not in header_text:
             errors.append(f"Required security header missing: {required}")
 
