@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "validate": "python scripts/validate_site.py"
+    "validate": "python3 scripts/validate_site.py"
   },
   "devDependencies": {
     "astro": "^7.3.5"
