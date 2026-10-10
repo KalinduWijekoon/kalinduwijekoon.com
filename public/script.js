@@ -47,3 +47,24 @@ if (hero && bannerParallax && !reduceMotion) {
   hero.addEventListener("mousemove", handleMove);
   hero.addEventListener("mouseleave", reset);
 }
+
+if (!reduceMotion && "IntersectionObserver" in window) {
+  const targets = document.querySelectorAll(
+    ".section-heading, .focus-card, .work-item, .approach-copy, .principles li, .cta-inner",
+  );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+  targets.forEach((el) => {
+    el.classList.add("reveal");
+    observer.observe(el);
+  });
+}
