@@ -39,6 +39,11 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <div class="site-bg" aria-hidden="true">
+      <i class="bg-orb bo-1"></i>
+      <i class="bg-orb bo-2"></i>
+      <i class="bg-orb bo-3"></i>
+    </div>
     <!-- shared gradients, referenced by the illustrations below -->
     <svg
       class="defs-only"
@@ -342,48 +347,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                   </svg>
                 </div>
               </div>
-              <div class="cl cl-e">
-                <div class="drift drift-e">
-                  <svg viewBox="0 0 170 99" focusable="false">
-                    <use
-                      href="#cloud"
-                      width="170"
-                      height="99"
-                      fill="url(#g-cloud-violet)"
-                      opacity="0.26"
-                    ></use>
-                    <use
-                      href="#cloud"
-                      width="170"
-                      height="99"
-                      fill="url(#g-cloud-shine)"
-                      opacity="0.26"
-                    ></use>
-                  </svg>
-                </div>
-              </div>
-              <div class="cl cl-f">
-                <div class="drift drift-f">
-                  <div class="fx">
-                    <svg viewBox="0 0 190 110" focusable="false">
-                      <use
-                        href="#cloud"
-                        width="190"
-                        height="110"
-                        fill="url(#g-cloud-cyan)"
-                        opacity="0.2"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        width="190"
-                        height="110"
-                        fill="url(#g-cloud-shine)"
-                        opacity="0.2"
-                      ></use>
-                    </svg>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
           <div class="horizon"></div>
@@ -443,9 +406,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                 <div class="city">
                   <i class="ground-shadow"></i>
                   <i class="scan"></i>
-                  <i class="radar r1"></i>
-                  <i class="radar r2"></i>
-                  <i class="radar r3"></i>
                   <div class="pillar pl1">
                     <i class="pf pf-left"></i>
                     <i class="pf pf-right"></i>
@@ -623,97 +583,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                         class="tunnel"
                         d="M490 98 Q440 66 404 62"
                       ></path>
-                      <use
-                        href="#cloud"
-                        x="10"
-                        y="60"
-                        width="160"
-                        height="93"
-                        fill="url(#g-cloud-teal)"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        x="10"
-                        y="60"
-                        width="160"
-                        height="93"
-                        fill="url(#g-cloud-shine)"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        x="470"
-                        y="55"
-                        width="160"
-                        height="93"
-                        fill="url(#g-cloud-violet)"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        x="470"
-                        y="55"
-                        width="160"
-                        height="93"
-                        fill="url(#g-cloud-shine)"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        x="210"
-                        y="0"
-                        width="220"
-                        height="128"
-                        fill="url(#g-cloud-cyan)"
-                      ></use>
-                      <use
-                        href="#cloud"
-                        x="210"
-                        y="0"
-                        width="220"
-                        height="128"
-                        fill="url(#g-cloud-shine)"
-                      ></use>
-                      <g class="cp-glyph">
-                        <rect
-                          x="78"
-                          y="99"
-                          width="24"
-                          height="6"
-                          rx="1.5"
-                        ></rect>
-                        <rect
-                          x="78"
-                          y="108"
-                          width="24"
-                          height="6"
-                          rx="1.5"
-                        ></rect>
-                        <rect
-                          x="78"
-                          y="117"
-                          width="24"
-                          height="6"
-                          rx="1.5"
-                        ></rect>
-                        <path d="M550 99 L541 114 H559 Z"></path>
-                        <circle cx="550" cy="99" r="3.2"></circle>
-                        <circle cx="541" cy="114" r="3.2"></circle>
-                        <circle cx="559" cy="114" r="3.2"></circle>
-                      </g>
-                      <path
-                        class="cp-emblem"
-                        d="M320 40 L342 48 V65 C342 80 333 89 320 95 C307 89 298 80 298 65 V48 Z"
-                      ></path>
-                      <rect
-                        class="cp-lock"
-                        x="312"
-                        y="64"
-                        width="16"
-                        height="13"
-                        rx="3"
-                      ></rect>
-                      <path
-                        class="cp-lock"
-                        d="M315 64 V59.5 a5 5 0 0 1 10 0 V64"
-                      ></path>
                       <g class="tunnel-token" opacity="0">
                         <circle r="7"></circle>
                         <g class="tunnel-lock">
@@ -737,37 +606,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                           attributeName="opacity"
                           dur="3.2s"
                           begin="2.8s"
-                          repeatCount="indefinite"
-                          values="0;0.7;0.7;0"
-                          keyTimes="0;0.12;0.85;1"
-                        ></animate>
-                      </g>
-                      <g class="tunnel-token" opacity="0">
-                        <circle r="7"></circle>
-                        <g class="tunnel-lock">
-                          <rect
-                            x="-4"
-                            y="-1"
-                            width="8"
-                            height="6"
-                            rx="1.5"
-                          ></rect>
-                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
-                        </g>
-                        <animateMotion
-                          dur="3.2s"
-                          begin="4.4s"
-                          repeatCount="indefinite"
-                          keyPoints="1;0"
-                          keyTimes="0;1"
-                          calcMode="linear"
-                        >
-                          <mpath href="#tun-l"></mpath>
-                        </animateMotion>
-                        <animate
-                          attributeName="opacity"
-                          dur="3.2s"
-                          begin="4.4s"
                           repeatCount="indefinite"
                           values="0;0.7;0.7;0"
                           keyTimes="0;0.12;0.85;1"
@@ -814,37 +652,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                           <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
                         </g>
                         <animateMotion
-                          dur="3.2s"
-                          begin="5.2s"
-                          repeatCount="indefinite"
-                          keyPoints="1;0"
-                          keyTimes="0;1"
-                          calcMode="linear"
-                        >
-                          <mpath href="#tun-r"></mpath>
-                        </animateMotion>
-                        <animate
-                          attributeName="opacity"
-                          dur="3.2s"
-                          begin="5.2s"
-                          repeatCount="indefinite"
-                          values="0;0.7;0.7;0"
-                          keyTimes="0;0.12;0.85;1"
-                        ></animate>
-                      </g>
-                      <g class="tunnel-token" opacity="0">
-                        <circle r="7"></circle>
-                        <g class="tunnel-lock">
-                          <rect
-                            x="-4"
-                            y="-1"
-                            width="8"
-                            height="6"
-                            rx="1.5"
-                          ></rect>
-                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
-                        </g>
-                        <animateMotion
                           dur="2.6s"
                           begin="3.0s"
                           repeatCount="indefinite"
@@ -855,34 +662,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                           attributeName="opacity"
                           dur="2.6s"
                           begin="3.0s"
-                          repeatCount="indefinite"
-                          values="0;0.6;0.6;0"
-                          keyTimes="0;0.15;0.8;1"
-                        ></animate>
-                      </g>
-                      <g class="tunnel-token" opacity="0">
-                        <circle r="7"></circle>
-                        <g class="tunnel-lock">
-                          <rect
-                            x="-4"
-                            y="-1"
-                            width="8"
-                            height="6"
-                            rx="1.5"
-                          ></rect>
-                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
-                        </g>
-                        <animateMotion
-                          dur="2.6s"
-                          begin="4.3s"
-                          repeatCount="indefinite"
-                        >
-                          <mpath href="#beam-c"></mpath>
-                        </animateMotion>
-                        <animate
-                          attributeName="opacity"
-                          dur="2.6s"
-                          begin="4.3s"
                           repeatCount="indefinite"
                           values="0;0.6;0.6;0"
                           keyTimes="0;0.15;0.8;1"
@@ -945,10 +724,135 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                         ></animate>
                       </g>
                     </svg>
+                    <div class="mc mc-l">
+                      <div class="mc-float">
+                        <svg viewBox="0 0 160 93" focusable="false">
+                          <use
+                            href="#cloud"
+                            width="160"
+                            height="93"
+                            fill="url(#g-cloud-teal)"
+                          ></use>
+                          <use
+                            href="#cloud"
+                            width="160"
+                            height="93"
+                            fill="url(#g-cloud-shine)"
+                          ></use>
+                          <g class="cp-glyph">
+                            <rect
+                              class="bar b1"
+                              x="68"
+                              y="39"
+                              width="24"
+                              height="6"
+                              rx="1.5"
+                            ></rect>
+                            <rect
+                              class="bar b2"
+                              x="68"
+                              y="48"
+                              width="24"
+                              height="6"
+                              rx="1.5"
+                            ></rect>
+                            <rect
+                              class="bar b3"
+                              x="68"
+                              y="57"
+                              width="24"
+                              height="6"
+                              rx="1.5"
+                            ></rect>
+                          </g>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="mc mc-c">
+                      <div class="mc-float">
+                        <svg viewBox="0 0 220 128" focusable="false">
+                          <use
+                            href="#cloud"
+                            width="220"
+                            height="128"
+                            fill="url(#g-cloud-cyan)"
+                          ></use>
+                          <use
+                            href="#cloud"
+                            width="220"
+                            height="128"
+                            fill="url(#g-cloud-shine)"
+                          ></use>
+                          <circle
+                            class="mc-ring"
+                            cx="110"
+                            cy="66"
+                            r="32"
+                          ></circle>
+                          <path
+                            class="cp-emblem"
+                            d="M110 40 L132 48 V65 C132 80 123 89 110 95 C97 89 88 80 88 65 V48 Z"
+                          ></path>
+                          <rect
+                            class="cp-lock"
+                            x="102"
+                            y="64"
+                            width="16"
+                            height="13"
+                            rx="3"
+                          ></rect>
+                          <path
+                            class="cp-lock"
+                            d="M105 64 V59.5 a5 5 0 0 1 10 0 V64"
+                          ></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="mc mc-r">
+                      <div class="mc-float">
+                        <svg viewBox="0 0 160 93" focusable="false">
+                          <use
+                            href="#cloud"
+                            width="160"
+                            height="93"
+                            fill="url(#g-cloud-violet)"
+                          ></use>
+                          <use
+                            href="#cloud"
+                            width="160"
+                            height="93"
+                            fill="url(#g-cloud-shine)"
+                          ></use>
+                          <g class="cp-glyph">
+                            <path d="M80 44 L71 59 H89 Z"></path>
+                            <circle cx="80" cy="44" r="3.2"></circle>
+                            <circle cx="71" cy="59" r="3.2"></circle>
+                            <circle cx="89" cy="59" r="3.2"></circle>
+                          </g>
+                          <circle
+                            class="node-ping n1"
+                            cx="80"
+                            cy="44"
+                            r="6"
+                          ></circle>
+                          <circle
+                            class="node-ping n2"
+                            cx="71"
+                            cy="59"
+                            r="6"
+                          ></circle>
+                          <circle
+                            class="node-ping n3"
+                            cx="89"
+                            cy="59"
+                            r="6"
+                          ></circle>
+                        </svg>
+                      </div>
+                    </div>
                   </div>
                   <div class="dome-wrap">
                     <i class="dome-glass"></i>
-                    <i class="dome-sheen"></i>
                     <i class="dome-flash"></i>
                     <div class="dome">
                       <i class="arch a0"></i>
@@ -964,10 +868,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                       <i class="lat lt2"></i>
                     </div>
                   </div>
-                  <i class="in-pkt i1"></i>
-                  <i class="in-pkt i2"></i>
-                  <i class="in-pkt i3"></i>
-                  <i class="in-pkt i4"></i>
                   <i class="eg-dot e1"></i>
                   <i class="eg-gate e1"></i>
                   <i class="eg-lock e1">
@@ -979,14 +879,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                   <i class="eg-dot e2"></i>
                   <i class="eg-gate e2"></i>
                   <i class="eg-lock e2">
-                    <svg viewBox="0 0 24 24" focusable="false">
-                      <rect x="5" y="11" width="14" height="10" rx="2"></rect>
-                      <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
-                    </svg>
-                  </i>
-                  <i class="eg-dot e3"></i>
-                  <i class="eg-gate e3"></i>
-                  <i class="eg-lock e3">
                     <svg viewBox="0 0 24 24" focusable="false">
                       <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                       <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
