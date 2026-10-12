@@ -1,6 +1,8 @@
 ---
 import "@fontsource-variable/inter";
+import "@fontsource-variable/sora";
 const siteUrl = "https://kalinduwijekoon.com";
+const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
 ---
 
 <!doctype html>
@@ -12,8 +14,12 @@ const siteUrl = "https://kalinduwijekoon.com";
       name="description"
       content="Cybersecurity engineer portfolio with a strong bias toward cloud platforms, detection engineering, and practical security automation."
     />
-    <meta name="theme-color" content="#08111f" />
-    <meta property="og:title" content="Cybersecurity Engineer | Portfolio" />
+    <meta name="theme-color" content="#060913" />
+    <meta name="color-scheme" content="dark" />
+    <meta
+      property="og:title"
+      content="Kalindu Wijekoon | Cybersecurity Engineer"
+    />
     <meta
       property="og:description"
       content="A practical cybersecurity portfolio, with a cloud-first focus. Based in Sri Lanka, open to relocation."
@@ -28,22 +34,154 @@ const siteUrl = "https://kalinduwijekoon.com";
       content="Defend the systems. Kalindu Wijekoon, cybersecurity engineer."
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <title>Cybersecurity Engineer | Portfolio</title>
+    <title>Kalindu Wijekoon | Cybersecurity Engineer</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <!-- shared gradients, referenced by the illustrations below -->
+    <svg
+      class="defs-only"
+      width="0"
+      height="0"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <defs>
+        <linearGradient id="g-stroke" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#4de1ff"></stop>
+          <stop offset="1" stop-color="#b18cff"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-cloud"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="215"
+        >
+          <stop offset="0" stop-color="#9aa8ff"></stop>
+          <stop offset="1" stop-color="#3b3fd0"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-cloud-cyan"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="215"
+        >
+          <stop offset="0" stop-color="#8fe9ff"></stop>
+          <stop offset="1" stop-color="#2a6fd0"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-cloud-violet"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="215"
+        >
+          <stop offset="0" stop-color="#d2b4ff"></stop>
+          <stop offset="1" stop-color="#5b3fc4"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-cloud-teal"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="215"
+        >
+          <stop offset="0" stop-color="#9ff5e0"></stop>
+          <stop offset="1" stop-color="#1f7f8f"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-beam"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="108"
+          x2="0"
+          y2="170"
+        >
+          <stop offset="0" stop-color="#bff6ff" stop-opacity="0.95"></stop>
+          <stop offset="1" stop-color="#4de1ff" stop-opacity="0.45"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-beam2"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="118"
+          x2="0"
+          y2="250"
+        >
+          <stop offset="0" stop-color="#bff6ff" stop-opacity="0.95"></stop>
+          <stop offset="1" stop-color="#4de1ff" stop-opacity="0.45"></stop>
+        </linearGradient>
+        <linearGradient
+          id="g-cloud-shine"
+          gradientUnits="userSpaceOnUse"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="150"
+        >
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"></stop>
+          <stop offset="0.55" stop-color="#ffffff" stop-opacity="0"></stop>
+        </linearGradient>
+        <radialGradient id="g-glow">
+          <stop offset="0" stop-color="#4de1ff" stop-opacity="0.28"></stop>
+          <stop offset="1" stop-color="#4de1ff" stop-opacity="0"></stop>
+        </radialGradient>
+        <radialGradient id="g-halo">
+          <stop offset="0" stop-color="#cfe9ff" stop-opacity="0.55"></stop>
+          <stop offset="1" stop-color="#cfe9ff" stop-opacity="0"></stop>
+        </radialGradient>
+        <radialGradient id="g-light">
+          <stop offset="0" stop-color="#ffffff" stop-opacity="0.42"></stop>
+          <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+        </radialGradient>
+        <radialGradient id="g-shine">
+          <stop offset="0" stop-color="#bff6ff" stop-opacity="0.32"></stop>
+          <stop offset="1" stop-color="#bff6ff" stop-opacity="0"></stop>
+        </radialGradient>
+        <clipPath id="clip-cloud">
+          <g transform="translate(140 180) scale(0.973)">
+            <rect x="10" y="120" width="340" height="90" rx="45"></rect>
+            <circle cx="80" cy="125" r="62"></circle>
+            <circle cx="170" cy="80" r="84"></circle>
+            <circle cx="262" cy="110" r="66"></circle>
+            <circle cx="318" cy="150" r="48"></circle>
+          </g>
+        </clipPath>
+        <clipPath id="clip-shield">
+          <path d="M313 226 L371 248 V294 C371 332 347 356 313 370 C279 356 255 332 255 294 V248 Z"></path>
+        </clipPath>
+        <radialGradient id="g-glow2">
+          <stop offset="0" stop-color="#b18cff" stop-opacity="0.3"></stop>
+          <stop offset="1" stop-color="#b18cff" stop-opacity="0"></stop>
+        </radialGradient>
+        <symbol id="cloud" viewBox="0 0 370 215" overflow="visible">
+          <rect x="10" y="120" width="340" height="90" rx="45"></rect>
+          <circle cx="80" cy="125" r="62"></circle>
+          <circle cx="170" cy="80" r="84"></circle>
+          <circle cx="262" cy="110" r="66"></circle>
+          <circle cx="318" cy="150" r="48"></circle>
+        </symbol>
+      </defs>
+    </svg>
+
     <a class="skip-link" href="#main-content">
       Skip to content
     </a>
     <header class="site-header">
-      <nav class="nav shell" aria-label="Primary navigation">
-        <a class="brand" href="#top" aria-label="Home">
+      <nav class="nav shell" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Kalindu Wijekoon, home">
           <span class="brand-mark" aria-hidden="true">
             K
           </span>
-          <span>
-            Kalindu<span class="brand-accent"> Wijekoon</span>
+          <span class="brand-name" aria-hidden="true">
+            Kalindu <span class="brand-dim">Wijekoon</span>
           </span>
         </a>
         <button
@@ -56,182 +194,1077 @@ const siteUrl = "https://kalinduwijekoon.com";
         </button>
         <div class="nav-links" id="nav-links">
           <a href="#focus">Focus</a>
-          <a href="#work">Selected work</a>
+          <a href="#work">Projects</a>
           <a href="#approach">Approach</a>
           <a class="nav-cta" href="mailto:reach.kalindu@gmail.com">
             Let's connect <span aria-hidden="true">↗</span>
           </a>
         </div>
       </nav>
+      <div class="progress" aria-hidden="true"></div>
     </header>
 
     <main id="main-content">
-      <section class="hero shell" id="top">
-        <div class="hero-banner" aria-hidden="true">
-          <div class="banner-parallax">
-            <svg
-              class="banner-graphic"
-              viewBox="0 0 1180 700"
-              preserveAspectRatio="xMidYMid meet"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g class="banner-orbit">
-                <circle class="banner-dot" cx="730" cy="350" r="11"></circle>
-                <circle class="banner-dot" cx="230" cy="560" r="9"></circle>
-                <circle class="banner-dot" cx="260" cy="160" r="9"></circle>
-              </g>
-              <g class="banner-cloud">
-                <rect x="300" y="330" width="260" height="90" rx="45"></rect>
-                <circle cx="360" cy="310" r="48"></circle>
-                <circle cx="430" cy="275" r="60"></circle>
-                <circle cx="500" cy="305" r="50"></circle>
-                <circle cx="545" cy="335" r="38"></circle>
-                <circle cx="270" cy="335" r="34"></circle>
-              </g>
-            </svg>
+      <section class="hero" id="top">
+        <div class="aurora aurora-a" aria-hidden="true"></div>
+        <div class="aurora aurora-b" aria-hidden="true"></div>
+        <div class="world art" aria-hidden="true">
+          <div class="sky">
+            <div class="sky-frame">
+              <svg class="stars" viewBox="0 0 1600 900" focusable="false">
+                <circle cx="683" cy="92" r="2.2"></circle>
+                <circle cx="1117" cy="63" r="1.8"></circle>
+                <circle cx="1213" cy="44" r="1.5"></circle>
+                <circle cx="96" cy="59" r="2.2"></circle>
+                <circle cx="205" cy="297" r="2.2"></circle>
+                <circle cx="141" cy="438" r="1.2"></circle>
+                <circle cx="477" cy="337" r="1.2"></circle>
+                <circle cx="121" cy="128" r="1.2"></circle>
+                <circle cx="1160" cy="454" r="1.5"></circle>
+                <circle cx="613" cy="229" r="1.5"></circle>
+                <circle cx="1167" cy="432" r="1.5"></circle>
+                <circle cx="231" cy="312" r="1.5"></circle>
+                <circle cx="782" cy="64" r="1.2"></circle>
+                <circle cx="1036" cy="363" r="2.2"></circle>
+                <circle cx="663" cy="253" r="2.2"></circle>
+                <circle cx="760" cy="168" r="1.5"></circle>
+                <circle cx="187" cy="309" r="1.8"></circle>
+                <circle cx="1095" cy="268" r="1.8"></circle>
+                <circle cx="1513" cy="244" r="1.8"></circle>
+                <circle cx="1068" cy="229" r="1.5"></circle>
+                <circle cx="1570" cy="190" r="1.5"></circle>
+                <circle cx="1021" cy="230" r="1.2"></circle>
+              </svg>
+              <i class="tw tw1"></i>
+              <i class="tw tw2"></i>
+              <i class="tw tw3"></i>
+              <i class="tw tw4"></i>
+              <i class="tw tw5"></i>
+              <i class="tw tw6"></i>
+              <i class="tw tw7"></i>
+              <i class="tw tw8"></i>
+              <div class="cl cl-a">
+                <div class="drift drift-a">
+                  <svg viewBox="0 0 220 128" focusable="false">
+                    <circle
+                      class="halo"
+                      cx="110"
+                      cy="64"
+                      r="125"
+                      fill="url(#g-halo)"
+                    ></circle>
+                    <use
+                      href="#cloud"
+                      width="220"
+                      height="128"
+                      fill="url(#g-cloud-cyan)"
+                      opacity="0.32"
+                    ></use>
+                    <use
+                      href="#cloud"
+                      width="220"
+                      height="128"
+                      fill="url(#g-cloud-shine)"
+                      opacity="0.32"
+                    ></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="cl cl-b">
+                <div class="drift drift-b">
+                  <div class="fx">
+                    <svg viewBox="0 0 300 174" focusable="false">
+                      <use
+                        href="#cloud"
+                        width="300"
+                        height="174"
+                        fill="url(#g-cloud-violet)"
+                        opacity="0.22"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        width="300"
+                        height="174"
+                        fill="url(#g-cloud-shine)"
+                        opacity="0.22"
+                      ></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div class="cl cl-c">
+                <div class="drift drift-c">
+                  <svg viewBox="0 0 150 87" focusable="false">
+                    <path class="drop d1" d="M35 88 v14"></path>
+                    <path class="drop d2" d="M53 93 v14"></path>
+                    <path class="drop d3" d="M71 88 v14"></path>
+                    <path class="drop d4" d="M89 93 v14"></path>
+                    <path class="drop d5" d="M107 88 v14"></path>
+                    <use
+                      href="#cloud"
+                      width="150"
+                      height="87"
+                      fill="url(#g-cloud)"
+                      opacity="0.3"
+                    ></use>
+                    <use
+                      href="#cloud"
+                      width="150"
+                      height="87"
+                      fill="url(#g-cloud-shine)"
+                      opacity="0.3"
+                    ></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="cl cl-d">
+                <div class="drift drift-d">
+                  <svg viewBox="0 0 200 116" focusable="false">
+                    <use
+                      class="cloud-flash"
+                      href="#cloud"
+                      width="200"
+                      height="116"
+                      fill="url(#g-cloud-teal)"
+                      opacity="0.3"
+                    ></use>
+                    <use
+                      href="#cloud"
+                      width="200"
+                      height="116"
+                      fill="url(#g-cloud-shine)"
+                      opacity="0.3"
+                    ></use>
+                    <path
+                      class="bolt"
+                      d="M105 112 L92 138 L106 138 L94 168"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div class="cl cl-e">
+                <div class="drift drift-e">
+                  <svg viewBox="0 0 170 99" focusable="false">
+                    <use
+                      href="#cloud"
+                      width="170"
+                      height="99"
+                      fill="url(#g-cloud-violet)"
+                      opacity="0.26"
+                    ></use>
+                    <use
+                      href="#cloud"
+                      width="170"
+                      height="99"
+                      fill="url(#g-cloud-shine)"
+                      opacity="0.26"
+                    ></use>
+                  </svg>
+                </div>
+              </div>
+              <div class="cl cl-f">
+                <div class="drift drift-f">
+                  <div class="fx">
+                    <svg viewBox="0 0 190 110" focusable="false">
+                      <use
+                        href="#cloud"
+                        width="190"
+                        height="110"
+                        fill="url(#g-cloud-cyan)"
+                        opacity="0.2"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        width="190"
+                        height="110"
+                        fill="url(#g-cloud-shine)"
+                        opacity="0.2"
+                      ></use>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="horizon"></div>
+          <div class="scene">
+            <div class="cam">
+              <div class="plane">
+                <div class="ground-grid"></div>
+                <svg class="links" viewBox="500 0 2000 700" focusable="false">
+                  <path
+                    class="region"
+                    transform="translate(1500 232) scale(1.55)"
+                    vector-effect="non-scaling-stroke"
+                    d="M-150 105 H150 A52 52 0 0 0 178 7 A76 76 0 0 0 82 -86 A100 100 0 0 0 -88 -96 A70 70 0 0 0 -186 6 A52 52 0 0 0 -150 105 Z"
+                  ></path>
+                  <path
+                    id="lk0"
+                    class="link link-far"
+                    d="M1060 150 L1500 220"
+                  ></path>
+                  <circle class="far-node" cx="1060" cy="150" r="9"></circle>
+                  <path
+                    id="lk1"
+                    class="link link-far"
+                    d="M2150 120 L1500 220"
+                  ></path>
+                  <circle class="far-node" cx="2150" cy="120" r="9"></circle>
+                  <path
+                    id="lk3"
+                    class="link link-far"
+                    d="M1980 520 L1500 220"
+                  ></path>
+                  <circle class="far-node" cx="1980" cy="520" r="9"></circle>
+                  <path
+                    id="lk5"
+                    class="link link-far"
+                    d="M2420 300 L1500 220"
+                  ></path>
+                  <circle class="far-node" cx="2420" cy="300" r="9"></circle>
+                  <path class="link link-deny" d="M1500 220 L2200 550"></path>
+                  <circle
+                    class="far-node deny-node"
+                    cx="2200"
+                    cy="550"
+                    r="10"
+                  ></circle>
+                  <path class="link" d="M1410 180 L1460 130"></path>
+                  <path class="link" d="M1460 130 L1520 160"></path>
+                  <path class="link" d="M1520 160 L1580 200"></path>
+                  <path class="link" d="M1410 180 L1400 260"></path>
+                  <path class="link" d="M1400 260 L1470 230"></path>
+                  <path class="link" d="M1470 230 L1520 160"></path>
+                  <path class="link" d="M1470 230 L1540 270"></path>
+                  <path class="link" d="M1540 270 L1600 280"></path>
+                  <path class="link" d="M1580 200 L1600 280"></path>
+                  <path class="link" d="M1470 230 L1480 310"></path>
+                </svg>
+                <div class="city">
+                  <i class="ground-shadow"></i>
+                  <i class="scan"></i>
+                  <i class="radar r1"></i>
+                  <i class="radar r2"></i>
+                  <i class="radar r3"></i>
+                  <div class="pillar pl1">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                  </div>
+                  <div class="pillar pl2">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d svc">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <ellipse cx="12" cy="6" rx="7" ry="3"></ellipse>
+                        <path d="M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl3">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d svc">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                        <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl4">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d svc">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3M4 7l2 12c.3 1.2 3 2 6 2s5.7-.8 6-2l2-12"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl5">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl6">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl7">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl8">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d svc">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <circle cx="8" cy="12" r="4"></circle>
+                        <path d="M12 12h9M18 12v3M21 12v2"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="pillar pl9">
+                    <i class="pf pf-left"></i>
+                    <i class="pf pf-right"></i>
+                    <i class="pf pf-front"></i>
+                    <i class="pf pf-top"></i>
+                    <i class="badge3d flag-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 7v6M12 17v.5"></path>
+                      </svg>
+                    </i>
+                    <i class="badge3d fix-badge">
+                      <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M6.5 12.5l3.5 3.5 7.5-8"></path>
+                      </svg>
+                    </i>
+                  </div>
+                  <div class="control-plane">
+                    <svg viewBox="0 0 640 250" focusable="false">
+                      <path
+                        id="beam-c"
+                        class="cp-beam b2"
+                        stroke="url(#g-beam2)"
+                        d="M320 124 V250"
+                      ></path>
+                      <path
+                        id="beam-l"
+                        class="cp-beam b2"
+                        stroke="url(#g-beam2)"
+                        d="M110 150 L168 236"
+                      ></path>
+                      <path
+                        id="beam-r"
+                        class="cp-beam b3"
+                        stroke="url(#g-beam2)"
+                        d="M530 146 L472 234"
+                      ></path>
+                      <path
+                        id="tun-l"
+                        class="tunnel"
+                        d="M150 104 Q200 70 236 62"
+                      ></path>
+                      <path
+                        id="tun-r"
+                        class="tunnel"
+                        d="M490 98 Q440 66 404 62"
+                      ></path>
+                      <use
+                        href="#cloud"
+                        x="10"
+                        y="60"
+                        width="160"
+                        height="93"
+                        fill="url(#g-cloud-teal)"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        x="10"
+                        y="60"
+                        width="160"
+                        height="93"
+                        fill="url(#g-cloud-shine)"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        x="470"
+                        y="55"
+                        width="160"
+                        height="93"
+                        fill="url(#g-cloud-violet)"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        x="470"
+                        y="55"
+                        width="160"
+                        height="93"
+                        fill="url(#g-cloud-shine)"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        x="210"
+                        y="0"
+                        width="220"
+                        height="128"
+                        fill="url(#g-cloud-cyan)"
+                      ></use>
+                      <use
+                        href="#cloud"
+                        x="210"
+                        y="0"
+                        width="220"
+                        height="128"
+                        fill="url(#g-cloud-shine)"
+                      ></use>
+                      <g class="cp-glyph">
+                        <rect
+                          x="78"
+                          y="99"
+                          width="24"
+                          height="6"
+                          rx="1.5"
+                        ></rect>
+                        <rect
+                          x="78"
+                          y="108"
+                          width="24"
+                          height="6"
+                          rx="1.5"
+                        ></rect>
+                        <rect
+                          x="78"
+                          y="117"
+                          width="24"
+                          height="6"
+                          rx="1.5"
+                        ></rect>
+                        <path d="M550 99 L541 114 H559 Z"></path>
+                        <circle cx="550" cy="99" r="3.2"></circle>
+                        <circle cx="541" cy="114" r="3.2"></circle>
+                        <circle cx="559" cy="114" r="3.2"></circle>
+                      </g>
+                      <path
+                        class="cp-emblem"
+                        d="M320 40 L342 48 V65 C342 80 333 89 320 95 C307 89 298 80 298 65 V48 Z"
+                      ></path>
+                      <rect
+                        class="cp-lock"
+                        x="312"
+                        y="64"
+                        width="16"
+                        height="13"
+                        rx="3"
+                      ></rect>
+                      <path
+                        class="cp-lock"
+                        d="M315 64 V59.5 a5 5 0 0 1 10 0 V64"
+                      ></path>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="3.2s"
+                          begin="2.8s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#tun-l"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="3.2s"
+                          begin="2.8s"
+                          repeatCount="indefinite"
+                          values="0;0.7;0.7;0"
+                          keyTimes="0;0.12;0.85;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="3.2s"
+                          begin="4.4s"
+                          repeatCount="indefinite"
+                          keyPoints="1;0"
+                          keyTimes="0;1"
+                          calcMode="linear"
+                        >
+                          <mpath href="#tun-l"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="3.2s"
+                          begin="4.4s"
+                          repeatCount="indefinite"
+                          values="0;0.7;0.7;0"
+                          keyTimes="0;0.12;0.85;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="3.2s"
+                          begin="3.6s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#tun-r"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="3.2s"
+                          begin="3.6s"
+                          repeatCount="indefinite"
+                          values="0;0.7;0.7;0"
+                          keyTimes="0;0.12;0.85;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="3.2s"
+                          begin="5.2s"
+                          repeatCount="indefinite"
+                          keyPoints="1;0"
+                          keyTimes="0;1"
+                          calcMode="linear"
+                        >
+                          <mpath href="#tun-r"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="3.2s"
+                          begin="5.2s"
+                          repeatCount="indefinite"
+                          values="0;0.7;0.7;0"
+                          keyTimes="0;0.12;0.85;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="2.6s"
+                          begin="3.0s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#beam-c"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="2.6s"
+                          begin="3.0s"
+                          repeatCount="indefinite"
+                          values="0;0.6;0.6;0"
+                          keyTimes="0;0.15;0.8;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="2.6s"
+                          begin="4.3s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#beam-c"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="2.6s"
+                          begin="4.3s"
+                          repeatCount="indefinite"
+                          values="0;0.6;0.6;0"
+                          keyTimes="0;0.15;0.8;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="2.6s"
+                          begin="3.4s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#beam-l"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="2.6s"
+                          begin="3.4s"
+                          repeatCount="indefinite"
+                          values="0;0.6;0.6;0"
+                          keyTimes="0;0.15;0.8;1"
+                        ></animate>
+                      </g>
+                      <g class="tunnel-token" opacity="0">
+                        <circle r="7"></circle>
+                        <g class="tunnel-lock">
+                          <rect
+                            x="-4"
+                            y="-1"
+                            width="8"
+                            height="6"
+                            rx="1.5"
+                          ></rect>
+                          <path d="M-2.5 -1 V-3 a2.5 2.5 0 0 1 5 0 V-1"></path>
+                        </g>
+                        <animateMotion
+                          dur="2.6s"
+                          begin="3.9s"
+                          repeatCount="indefinite"
+                        >
+                          <mpath href="#beam-r"></mpath>
+                        </animateMotion>
+                        <animate
+                          attributeName="opacity"
+                          dur="2.6s"
+                          begin="3.9s"
+                          repeatCount="indefinite"
+                          values="0;0.6;0.6;0"
+                          keyTimes="0;0.15;0.8;1"
+                        ></animate>
+                      </g>
+                    </svg>
+                  </div>
+                  <div class="dome-wrap">
+                    <i class="dome-glass"></i>
+                    <i class="dome-sheen"></i>
+                    <i class="dome-flash"></i>
+                    <div class="dome">
+                      <i class="arch a0"></i>
+                      <i class="arch a1"></i>
+                      <i class="arch a2"></i>
+                      <i class="arch a3"></i>
+                      <i class="arch a4"></i>
+                      <i class="arch a5"></i>
+                      <i class="arch a6"></i>
+                      <i class="arch a7"></i>
+                      <i class="lat lt0"></i>
+                      <i class="lat lt1"></i>
+                      <i class="lat lt2"></i>
+                    </div>
+                  </div>
+                  <i class="in-pkt i1"></i>
+                  <i class="in-pkt i2"></i>
+                  <i class="in-pkt i3"></i>
+                  <i class="in-pkt i4"></i>
+                  <i class="eg-dot e1"></i>
+                  <i class="eg-gate e1"></i>
+                  <i class="eg-lock e1">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                    </svg>
+                  </i>
+                  <i class="eg-dot e2"></i>
+                  <i class="eg-gate e2"></i>
+                  <i class="eg-lock e2">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                    </svg>
+                  </i>
+                  <i class="eg-dot e3"></i>
+                  <i class="eg-gate e3"></i>
+                  <i class="eg-lock e3">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                      <path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+                    </svg>
+                  </i>
+                  <i class="dlp-pkt">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path d="M7 3h7l4 4v14H7z"></path>
+                      <path d="M14 3v4h4"></path>
+                      <path d="M10 12h5M10 16h5"></path>
+                    </svg>
+                  </i>
+                  <i class="dlp-ring"></i>
+                  <i class="dlp-block">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <circle cx="12" cy="12" r="8"></circle>
+                      <path d="M6.5 17.5l11-11"></path>
+                    </svg>
+                  </i>
+                  <i class="threat th1"></i>
+                  <i class="threat th1 ghost g1"></i>
+                  <i class="threat th1 ghost g2"></i>
+                  <i class="impact th1"></i>
+                  <i class="threat th2"></i>
+                  <i class="threat th2 ghost g1"></i>
+                  <i class="threat th2 ghost g2"></i>
+                  <i class="impact th2"></i>
+                  <i class="threat th3"></i>
+                  <i class="threat th3 ghost g1"></i>
+                  <i class="threat th3 ghost g2"></i>
+                  <i class="impact th3"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scrim"></div>
+        </div>
+        <div class="shell hero-grid">
+          <div class="hero-copy">
+            <h1>Defend the systems.</h1>
+            <p class="hero-summary">
+              Cloud security engineering — useful guardrails, measurable
+              detection, and infrastructure that developers can trust.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="mailto:reach.kalindu@gmail.com"
+              >
+                Email Kalindu <span aria-hidden="true">↗</span>
+              </a>
+              <a class="text-link" href="#work">
+                See reference projects <span aria-hidden="true">↓</span>
+              </a>
+            </div>
           </div>
         </div>
-        <div class="hero-copy">
-          <h1>Defend the systems.</h1>
-          <p class="hero-summary">
-            Cybersecurity engineering with a strong bias toward cloud platforms
-            — useful guardrails, measurable detection, and infrastructure that
-            developers can trust.
-          </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#work">
-              Explore selected work <span aria-hidden="true">↓</span>
-            </a>
-            <a class="text-link" href="mailto:reach.kalindu@gmail.com">
-              Get in touch <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-        <div class="hero-aside" aria-label="Current focus">
-          <div class="terminal-card-frame">
-            <div class="terminal-card">
-              <div class="terminal-top">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span class="terminal-label">security_context.yml</span>
-              </div>
-              <div class="terminal-body">
-                <p>
-                  <span class="code-muted">profile:</span>{" "}
-                  <span class="code-value">cybersecurity_engineer</span>
-                </p>
-                <p>
-                  <span class="code-muted">focus:</span>{" "}
-                  <span class="code-value">cloud_security</span>
-                </p>
-                <p>
-                  <span class="code-muted">location:</span>{" "}
-                  <span class="code-value">Sri_Lanka</span>
-                </p>
-                <p>
-                  <span class="code-muted">relocation:</span>{" "}
-                  <span class="code-value">open_to_relocation</span>
-                </p>
-                <p>
-                  <span class="code-muted">default:</span>{" "}
-                  <span class="code-value">secure_by_design</span>
-                </p>
-                <p>
-                  <span class="code-muted">signal:</span>{" "}
-                  <span class="code-green">● systems_online</span>
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="metric-row">
+
+        <div class="shell">
+          <dl class="status" aria-label="Profile">
             <div>
-              <strong>03</strong>
-              <span>security domains</span>
+              <dt>Role</dt>
+              <dd>Cybersecurity engineer</dd>
             </div>
             <div>
-              <strong>∞</strong>
-              <span>learning mindset</span>
+              <dt>Focus</dt>
+              <dd>Cloud security</dd>
             </div>
-          </div>
+            <div>
+              <dt>Based in</dt>
+              <dd>Sri Lanka</dd>
+            </div>
+            <div>
+              <dt>Status</dt>
+              <dd>
+                <span class="status-dot" aria-hidden="true"></span>Open to
+                relocation
+              </dd>
+            </div>
+          </dl>
         </div>
       </section>
 
       <section class="section shell" id="focus">
         <div class="section-heading">
-          <p class="eyebrow">01 / What I focus on</p>
-          <h2>
-            Security that makes
-            <br />
-            <em>momentum possible.</em>
-          </h2>
+          <h2>Security that makes momentum possible.</h2>
         </div>
-        <div class="focus-grid">
-          <article class="focus-card focus-card-featured">
-            <span class="card-number">01</span>
-            <div>
+        <ol class="lanes" role="list">
+          <li class="lane">
+            <div class="lane-body">
               <h3>Cloud foundations</h3>
               <p>
                 Designing landing zones, identity boundaries, logging, and
                 policy guardrails that scale with the organization.
               </p>
-              <ul class="tag-list">
+              <ul class="tag-list" role="list">
                 <li>AWS / Azure</li>
                 <li>IAM</li>
                 <li>Policy as code</li>
               </ul>
             </div>
-          </article>
-          <article class="focus-card">
-            <span class="card-number">02</span>
-            <div>
-              <h3>Detection & response</h3>
+            <div class="mini art m3d" aria-hidden="true">
+              <div class="stage3 s-stack">
+                <div class="slab sb-0"></div>
+                <div class="slab sb-1"></div>
+                <div class="slab sb-2"></div>
+                <div class="slab sb-3"></div>
+                <span class="bead"></span>
+              </div>
+            </div>
+          </li>
+          <li class="lane">
+            <div class="lane-body">
+              <h3>Detection &amp; response</h3>
               <p>
                 Turning cloud telemetry into useful signals, triage playbooks,
                 and response workflows that reduce uncertainty.
               </p>
-              <ul class="tag-list">
+              <ul class="tag-list" role="list">
                 <li>SIEM</li>
                 <li>Threat detection</li>
                 <li>Incident response</li>
               </ul>
             </div>
-          </article>
-          <article class="focus-card">
-            <span class="card-number">03</span>
-            <div>
+            <div class="mini art m3d" aria-hidden="true">
+              <div class="stage3 s-trace">
+                <div class="floor"></div>
+                <svg
+                  class="tslice ts-0"
+                  viewBox="0 0 320 128"
+                  focusable="false"
+                >
+                  <path
+                    class="trace-dim"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                </svg>
+                <svg
+                  class="tslice ts-1"
+                  viewBox="0 0 320 128"
+                  focusable="false"
+                >
+                  <path
+                    class="trace-dim"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                </svg>
+                <svg
+                  class="tslice ts-2"
+                  viewBox="0 0 320 128"
+                  focusable="false"
+                >
+                  <path
+                    class="trace-dim"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                </svg>
+                <svg
+                  class="tslice ts-3"
+                  viewBox="0 0 320 128"
+                  focusable="false"
+                >
+                  <path
+                    class="trace-dim"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                </svg>
+                <svg
+                  class="tslice ts-top"
+                  viewBox="0 0 320 128"
+                  focusable="false"
+                >
+                  <path
+                    class="trace-dim"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                  <path
+                    class="trace-live"
+                    pathLength="1"
+                    d="M0 70 H70 L82 70 L92 40 L104 100 L116 52 L124 70 H190 L200 70 L210 30 L224 104 L236 56 L244 70 H320"
+                  ></path>
+                  <circle class="alert-ring" cx="210" cy="30" r="8"></circle>
+                </svg>
+              </div>
+            </div>
+          </li>
+          <li class="lane">
+            <div class="lane-body">
               <h3>Secure delivery</h3>
               <p>
                 Embedding security checks into CI/CD so teams find issues early
                 without slowing down delivery.
               </p>
-              <ul class="tag-list">
+              <ul class="tag-list" role="list">
                 <li>GitHub Actions</li>
                 <li>IaC scanning</li>
                 <li>Supply chain</li>
               </ul>
             </div>
-          </article>
-        </div>
+            <div class="mini art m3d" aria-hidden="true">
+              <div class="stage3 s-flow">
+                <div class="cube c-0">
+                  <i class="face f-front">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path
+                        class="cube-tick ct-0"
+                        pathLength="1"
+                        d="M6 12.5 L10.5 17 L18 8"
+                      ></path>
+                    </svg>
+                  </i>
+                  <i class="face f-back"></i>
+                  <i class="face f-left"></i>
+                  <i class="face f-right"></i>
+                  <i class="face f-top"></i>
+                </div>
+                <div class="cube c-1">
+                  <i class="face f-front">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path
+                        class="cube-tick ct-1"
+                        pathLength="1"
+                        d="M6 12.5 L10.5 17 L18 8"
+                      ></path>
+                    </svg>
+                  </i>
+                  <i class="face f-back"></i>
+                  <i class="face f-left"></i>
+                  <i class="face f-right"></i>
+                  <i class="face f-top"></i>
+                </div>
+                <div class="cube c-2">
+                  <i class="face f-front">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                      <path
+                        class="cube-tick ct-2"
+                        pathLength="1"
+                        d="M6 12.5 L10.5 17 L18 8"
+                      ></path>
+                    </svg>
+                  </i>
+                  <i class="face f-back"></i>
+                  <i class="face f-left"></i>
+                  <i class="face f-right"></i>
+                  <i class="face f-top"></i>
+                </div>
+                <span class="pipe pp-0"></span>
+                <span class="pipe pp-1"></span>
+                <span class="pkt pk-0"></span>
+                <span class="pkt pk-1"></span>
+                <span class="pkt pk-2"></span>
+              </div>
+              <div class="cube-labels">
+                <span>Scan</span>
+                <span>Test</span>
+                <span>Ship</span>
+              </div>
+            </div>
+          </li>
+        </ol>
       </section>
 
-      <section class="section section-dark" id="work">
+      <section class="section section-band" id="work">
         <div class="shell">
-          <div class="section-heading section-heading-light">
-            <p class="eyebrow">02 / Selected work</p>
-            <h2>
-              Proof over <em>promises.</em>
-            </h2>
+          <div class="section-heading">
+            <h2>Reference projects.</h2>
             <p class="section-intro">
-              Sample case studies for the portfolio. Replace these with your own
-              labs, assessments, and measurable outcomes.
+              Illustrative projects that show how I approach the work. Real
+              write-ups will replace these as they are published.
             </p>
           </div>
-          <div class="work-list">
-            <article class="work-item">
-              <div class="work-index">01</div>
-              <div class="work-content">
-                <p class="work-kicker">Cloud governance · AWS</p>
+          <ol class="rows" role="list">
+            <li class="row">
+              <div class="row-body">
+                <p class="row-kicker">
+                  Cloud governance · AWS
+                  <span class="badge">Illustrative</span>
+                </p>
                 <h3>Guardrails without friction</h3>
                 <p>
                   A reference landing zone that combines least-privilege access,
@@ -239,25 +1272,76 @@ const siteUrl = "https://kalinduwijekoon.com";
                   developer path.
                 </p>
                 <a
-                  class="work-link"
+                  class="row-link"
                   href="mailto:reach.kalindu@gmail.com?subject=Cloud%20governance%20case%20study"
                 >
-                  Discuss the approach <span aria-hidden="true">↗</span>
+                  Discuss this project
+                  <span class="sr-only">: Guardrails without friction</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
-              <div class="work-visual visual-grid" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+              <div class="mini art" aria-hidden="true">
+                <svg viewBox="0 0 320 128" focusable="false">
+                  <path
+                    class="tree-line"
+                    d="M160 18 L80 60 M160 18 L160 60 M160 18 L240 60 M80 60 L50 104 M80 60 L110 104 M240 60 L210 104 M240 60 L270 104"
+                  ></path>
+                  <circle class="tnode" cx="160" cy="18" r="8"></circle>
+                  <circle class="tnode" cx="80" cy="60" r="6"></circle>
+                  <circle class="tnode" cx="160" cy="60" r="6"></circle>
+                  <circle class="tnode" cx="240" cy="60" r="6"></circle>
+                  <circle class="tnode" cx="50" cy="104" r="5"></circle>
+                  <circle class="tnode" cx="110" cy="104" r="5"></circle>
+                  <circle class="tnode" cx="210" cy="104" r="5"></circle>
+                  <circle class="tnode" cx="270" cy="104" r="5"></circle>
+                  <circle class="leaf-ping" cx="270" cy="104" r="9"></circle>
+                  <g class="gate">
+                    <circle cx="80" cy="60" r="12"></circle>
+                    <path d="M75 55 L85 65 M85 55 L75 65"></path>
+                  </g>
+                  <circle r="4" fill="#4de1ff" opacity="0">
+                    <animateMotion
+                      dur="4s"
+                      repeatCount="indefinite"
+                      calcMode="linear"
+                      path="M160 18 L240 60 L270 104"
+                      keyPoints="0;1;1"
+                      keyTimes="0;0.45;1"
+                    ></animateMotion>
+                    <animate
+                      attributeName="opacity"
+                      dur="4s"
+                      repeatCount="indefinite"
+                      values="0;1;1;0;0"
+                      keyTimes="0;0.05;0.44;0.5;1"
+                    ></animate>
+                  </circle>
+                  <circle r="4" fill="#b18cff" opacity="0">
+                    <animateMotion
+                      dur="4s"
+                      repeatCount="indefinite"
+                      calcMode="linear"
+                      path="M160 18 L80 60"
+                      keyPoints="0;0;1;1"
+                      keyTimes="0;0.5;0.74;1"
+                    ></animateMotion>
+                    <animate
+                      attributeName="opacity"
+                      dur="4s"
+                      repeatCount="indefinite"
+                      values="0;0;1;1;0;0"
+                      keyTimes="0;0.5;0.53;0.74;0.78;1"
+                    ></animate>
+                  </circle>
+                </svg>
               </div>
-            </article>
-            <article class="work-item">
-              <div class="work-index">02</div>
-              <div class="work-content">
-                <p class="work-kicker">Detection engineering · CloudTrail</p>
+            </li>
+            <li class="row">
+              <div class="row-body">
+                <p class="row-kicker">
+                  Detection engineering · CloudTrail
+                  <span class="badge">Illustrative</span>
+                </p>
                 <h3>From noisy logs to signals</h3>
                 <p>
                   A detection pack for suspicious identity activity, with tested
@@ -265,22 +1349,53 @@ const siteUrl = "https://kalinduwijekoon.com";
                   on-call team.
                 </p>
                 <a
-                  class="work-link"
+                  class="row-link"
                   href="mailto:reach.kalindu@gmail.com?subject=Detection%20engineering%20case%20study"
                 >
-                  Discuss the approach <span aria-hidden="true">↗</span>
+                  Discuss this project
+                  <span class="sr-only">: From noisy logs to signals</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
-              <div class="work-visual visual-pulse" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
+              <div class="mini art" aria-hidden="true">
+                <svg viewBox="0 0 320 128" focusable="false">
+                  <g class="noise">
+                    <circle class="dot" cx="14" cy="18" r="2.4"></circle>
+                    <circle class="dot" cx="26" cy="30" r="2.4"></circle>
+                    <circle class="dot" cx="10" cy="42" r="2.4"></circle>
+                    <circle class="dot" cx="34" cy="52" r="2.4"></circle>
+                    <circle class="dot" cx="20" cy="76" r="2.4"></circle>
+                    <circle class="dot" cx="40" cy="86" r="2.4"></circle>
+                    <circle class="dot" cx="12" cy="98" r="2.4"></circle>
+                    <circle class="dot" cx="30" cy="110" r="2.4"></circle>
+                    <circle class="dot" cx="44" cy="24" r="2.4"></circle>
+                    <circle class="dot" cx="16" cy="66" r="2.4"></circle>
+                    <circle class="dot" cx="36" cy="92" r="2.4"></circle>
+                    <circle class="dot" cx="22" cy="36" r="2.4"></circle>
+                    <circle class="dot" cx="8" cy="104" r="2.4"></circle>
+                    <circle class="dot" cx="28" cy="58" r="2.4"></circle>
+                  </g>
+                  <rect
+                    class="sieve"
+                    x="166"
+                    y="14"
+                    width="4"
+                    height="100"
+                    rx="2"
+                  ></rect>
+                  <circle class="signal" cx="12" cy="64" r="5"></circle>
+                  <circle class="badge-ring" cx="276" cy="64" r="14"></circle>
+                  <circle class="badge-core" cx="276" cy="64" r="10"></circle>
+                  <path class="badge-mark" d="M276 58 V65 M276 70 V71"></path>
+                </svg>
               </div>
-            </article>
-            <article class="work-item">
-              <div class="work-index">03</div>
-              <div class="work-content">
-                <p class="work-kicker">DevSecOps · GitHub Actions</p>
+            </li>
+            <li class="row">
+              <div class="row-body">
+                <p class="row-kicker">
+                  DevSecOps · GitHub Actions
+                  <span class="badge">Illustrative</span>
+                </p>
                 <h3>Security in the pull request</h3>
                 <p>
                   A lightweight pipeline for secrets, dependencies,
@@ -288,31 +1403,68 @@ const siteUrl = "https://kalinduwijekoon.com";
                   feedback.
                 </p>
                 <a
-                  class="work-link"
+                  class="row-link"
                   href="mailto:reach.kalindu@gmail.com?subject=DevSecOps%20case%20study"
                 >
-                  Discuss the approach <span aria-hidden="true">↗</span>
+                  Discuss this project
+                  <span class="sr-only">: Security in the pull request</span>
+                  <span aria-hidden="true">↗</span>
                 </a>
               </div>
-              <div class="work-visual visual-bars" aria-hidden="true">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+              <div class="mini art" aria-hidden="true">
+                <svg viewBox="0 0 320 128" focusable="false">
+                  <rect
+                    class="pr-panel"
+                    x="40"
+                    y="8"
+                    width="240"
+                    height="112"
+                    rx="14"
+                  ></rect>
+                  {checks.map((label, i) => (
+                    <>
+                      <circle
+                        class={`pr-dot pd-${i}`}
+                        cx="64"
+                        cy={28 + i * 22}
+                        r="8"
+                      ></circle>
+                      <path
+                        class={`pr-tick pt-${i}`}
+                        pathLength="1"
+                        d={`M60 ${28 + i * 22} L63 ${31.5 + i * 22} L69 ${24.5 + i * 22}`}
+                      ></path>
+                      <text class="mini-label" x="82" y={32 + i * 22}>
+                        {label}
+                      </text>
+                    </>
+                  ))}
+                  <rect
+                    class="pr-merge"
+                    x="212"
+                    y="86"
+                    width="56"
+                    height="22"
+                    rx="11"
+                  ></rect>
+                  <text
+                    class="pr-merge-label"
+                    x="240"
+                    y="101"
+                    text-anchor="middle"
+                  >
+                    Merge
+                  </text>
+                </svg>
               </div>
-            </article>
-          </div>
+            </li>
+          </ol>
         </div>
       </section>
 
-      <section class="section shell approach-section" id="approach">
+      <section class="section shell" id="approach">
         <div class="section-heading">
-          <p class="eyebrow">03 / My approach</p>
-          <h2>
-            Clear thinking.
-            <br />
-            <em>Practical outcomes.</em>
-          </h2>
+          <h2>Clear thinking. Practical outcomes.</h2>
         </div>
         <div class="approach-grid">
           <div class="approach-copy">
@@ -327,59 +1479,41 @@ const siteUrl = "https://kalinduwijekoon.com";
               improve. The goal is a safer system and a stronger engineering
               culture.
             </p>
-            <a class="button button-dark" href="mailto:reach.kalindu@gmail.com">
-              Start a conversation <span aria-hidden="true">↗</span>
-            </a>
           </div>
-          <ol class="principles">
-            <li>
-              <span>01</span>
-              <div>
-                <strong>Understand the system</strong>
-                <p>
-                  Map assets, identities, data flows, and the risks that matter
-                  to the business.
-                </p>
-              </div>
+          <ol class="principles" role="list">
+            <li class="principle">
+              <h3>Understand the system</h3>
+              <p>
+                Map assets, identities, data flows, and the risks that matter to
+                the business.
+              </p>
             </li>
-            <li>
-              <span>02</span>
-              <div>
-                <strong>Reduce the blast radius</strong>
-                <p>
-                  Prefer small, composable controls over brittle security
-                  theatre.
-                </p>
-              </div>
+            <li class="principle">
+              <h3>Reduce the blast radius</h3>
+              <p>
+                Prefer small, composable controls over brittle security theatre.
+              </p>
             </li>
-            <li>
-              <span>03</span>
-              <div>
-                <strong>Make the secure path easy</strong>
-                <p>
-                  Build feedback loops and defaults that work with the team, not
-                  against it.
-                </p>
-              </div>
+            <li class="principle">
+              <h3>Make the secure path easy</h3>
+              <p>
+                Build feedback loops and defaults that work with the team, not
+                against it.
+              </p>
             </li>
           </ol>
         </div>
       </section>
 
-      <section class="cta-section">
-        <div class="shell cta-inner">
-          <p class="eyebrow">Have a meaningful security problem?</p>
-          <h2>
-            Let's make your systems
-            <br />
-            <em>safer to move fast in.</em>
-          </h2>
-          <a
-            class="button button-primary"
-            href="mailto:reach.kalindu@gmail.com"
-          >
+      <section class="contact" id="contact">
+        <div class="aurora aurora-c" aria-hidden="true"></div>
+        <div class="aurora aurora-d" aria-hidden="true"></div>
+        <div class="shell contact-inner">
+          <h2>Let's make your systems safer to move fast in.</h2>
+          <a class="contact-mail" href="mailto:reach.kalindu@gmail.com">
             reach.kalindu@gmail.com <span aria-hidden="true">↗</span>
           </a>
+          <p class="contact-note">Based in Sri Lanka · open to relocation</p>
         </div>
       </section>
     </main>
