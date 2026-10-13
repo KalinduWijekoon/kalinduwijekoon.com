@@ -143,15 +143,43 @@ if (hero && world && "ResizeObserver" in window) {
   const copyParts = hero.querySelectorAll(
     ".hero-copy h1, .hero-summary, .hero-actions",
   );
+  const status = hero.querySelector(".status");
+  const region = world.querySelector(".region");
+  const topCloud = world.querySelector(".mc-c svg");
   const fitWorld = () => {
     world.style.removeProperty("--k");
     world.style.removeProperty("--ox");
+    world.style.removeProperty("--lift");
+    world.style.removeProperty("--sh");
     const base =
       parseFloat(getComputedStyle(world).getPropertyValue("--k")) || 1;
     const box = hero.getBoundingClientRect();
     if (narrowQuery.matches) {
-      const k = Math.min(base, box.width / 860);
-      world.style.setProperty("--k", Math.max(0.35, k).toFixed(3));
+      let k = Math.max(0.35, Math.min(base, box.width / 860));
+      world.style.setProperty("--k", k.toFixed(3));
+      if (!status || !region || !topCloud) return;
+      // fit the scene between the text and the status strip (whose height
+      // changes as its labels wrap), then sit the region just above the strip
+      const gap = 16;
+      const textBottom = Math.max(
+        ...Array.from(copyParts, (el) => el.getBoundingClientRect().bottom),
+      );
+      const statusTop = status.getBoundingClientRect().top;
+      const room = statusTop - textBottom - gap * 2;
+      const span =
+        region.getBoundingClientRect().bottom -
+        topCloud.getBoundingClientRect().top;
+      if (span > room) {
+        k = Math.max(0.35, (k * room) / span);
+        world.style.setProperty("--k", k.toFixed(3));
+      }
+      // then slide the finished scene so the region ends just above the strip
+      const lift = statusTop - gap - region.getBoundingClientRect().bottom;
+      world.style.setProperty("--lift", `${lift.toFixed(0)}px`);
+      world.style.setProperty(
+        "--sh",
+        `${(box.bottom - statusTop).toFixed(0)}px`,
+      );
       return;
     }
     // where the text actually ends

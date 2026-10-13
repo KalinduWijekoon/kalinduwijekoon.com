@@ -613,6 +613,10 @@ h3 {
   box-shadow: 0 0 2.5rem 0.6rem rgba(77, 225, 255, 0.12);
   animation: intro-fade 1.6s 0.2s ease-out both;
 }
+.horizon,
+.scene {
+  translate: 0 var(--lift, 0);
+}
 .scene {
   position: absolute;
   inset: 0;
@@ -625,7 +629,7 @@ h3 {
 .city,
 .pillar,
 .dome-wrap,
-.dome {
+.fog {
   transform-style: preserve-3d;
 }
 .cam {
@@ -841,7 +845,7 @@ h3 {
   --di: 1.14s;
 }
 
-/* the dome: a slowly turning wireframe shield over the region */
+/* the dome: a glass shield over the region */
 .dome-wrap {
   position: absolute;
   left: 0;
@@ -854,77 +858,6 @@ h3 {
     scale: 0.27 0.27 0.27;
   }
 }
-.dome {
-  animation: dome-spin 60s linear infinite;
-}
-@keyframes dome-spin {
-  to {
-    transform: rotateZ(360deg);
-  }
-}
-.arch,
-.lat {
-  position: absolute;
-  border: 1.5px solid rgba(77, 225, 255, 0.32);
-  animation: intro-fade 0.9s 1.2s ease-out both;
-}
-.arch {
-  left: -170px;
-  top: -170px;
-  width: 340px;
-  height: 170px;
-  border-bottom: 0;
-  border-radius: 170px 170px 0 0;
-  transform-origin: 50% 100%;
-  transform: rotateZ(var(--a)) rotateX(-90deg);
-}
-.a0 {
-  --a: 0deg;
-}
-.a1 {
-  --a: 22.5deg;
-}
-.a2 {
-  --a: 45deg;
-}
-.a3 {
-  --a: 67.5deg;
-}
-.a4 {
-  --a: 90deg;
-}
-.a5 {
-  --a: 112.5deg;
-}
-.a6 {
-  --a: 135deg;
-}
-.a7 {
-  --a: 157.5deg;
-}
-.lat {
-  border-radius: 50%;
-}
-.lt0 {
-  left: -170px;
-  top: -170px;
-  width: 340px;
-  height: 340px;
-}
-.lt1 {
-  left: -147px;
-  top: -147px;
-  width: 294px;
-  height: 294px;
-  transform: translateZ(85px);
-}
-.lt2 {
-  left: -97px;
-  top: -97px;
-  width: 194px;
-  height: 194px;
-  transform: translateZ(139px);
-}
 .dome-glass {
   position: absolute;
   left: -170px;
@@ -935,12 +868,351 @@ h3 {
   transform-origin: 50% 100%;
   transform: rotateX(-90deg);
   animation: intro-fade 1.2s 1.4s ease-out both;
+  /* the glass is a flat upright half-disc: fade it out toward the ground so
+     its straight base and near-vertical sides don't read as a box */
+  -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 40%);
+  mask-image: linear-gradient(to top, transparent 8%, #000 40%);
   background: radial-gradient(
     circle 170px at 50% 100%,
     rgba(77, 225, 255, 0.03) 55%,
     rgba(77, 225, 255, 0.16) 92%,
     rgba(77, 225, 255, 0) 100%
   );
+}
+
+/* the dome shell: thin horizontal slices sized to the dome's curve, stacked
+   up its height. Each is a wide, faint ring, so together they blend into a
+   curved glass surface that holds its shape as the camera tilts. Slices are
+   drawn at half size and scaled up; all static, only the wrap scales in. */
+.dome-slice,
+.dome-rim {
+  position: absolute;
+  left: calc(var(--r) * -1);
+  top: calc(var(--r) * -1);
+  width: calc(var(--r) * 2);
+  height: calc(var(--r) * 2);
+  border-radius: 50%;
+  animation: intro-fade 1.2s 1.4s ease-out both;
+}
+.dome-slice {
+  transform: translateZ(var(--z)) scale(2);
+  background: radial-gradient(
+    closest-side,
+    rgba(77, 225, 255, 0) 40%,
+    rgba(77, 225, 255, 0.045) 92%,
+    rgba(77, 225, 255, 0)
+  );
+}
+.ds0 {
+  --r: 85px;
+  --z: 4.2px;
+}
+.ds1 {
+  --r: 84.8px;
+  --z: 12.8px;
+}
+.ds2 {
+  --r: 84.3px;
+  --z: 21.2px;
+}
+.ds3 {
+  --r: 83.7px;
+  --z: 29.8px;
+}
+.ds4 {
+  --r: 82.8px;
+  --z: 38.2px;
+}
+.ds5 {
+  --r: 81.7px;
+  --z: 46.8px;
+}
+.ds6 {
+  --r: 80.4px;
+  --z: 55.2px;
+}
+.ds7 {
+  --r: 78.8px;
+  --z: 63.8px;
+}
+.ds8 {
+  --r: 76.9px;
+  --z: 72.2px;
+}
+.ds9 {
+  --r: 74.8px;
+  --z: 80.8px;
+}
+.ds10 {
+  --r: 72.3px;
+  --z: 89.2px;
+}
+.ds11 {
+  --r: 69.5px;
+  --z: 97.8px;
+}
+.ds12 {
+  --r: 66.4px;
+  --z: 106.2px;
+}
+.ds13 {
+  --r: 62.7px;
+  --z: 114.8px;
+}
+.ds14 {
+  --r: 58.5px;
+  --z: 123.2px;
+}
+.ds15 {
+  --r: 53.7px;
+  --z: 131.8px;
+}
+.ds16 {
+  --r: 48px;
+  --z: 140.2px;
+}
+.ds17 {
+  --r: 41.2px;
+  --z: 148.8px;
+}
+.ds18 {
+  --r: 32.3px;
+  --z: 157.2px;
+}
+.ds19 {
+  --r: 18.9px;
+  --z: 165.8px;
+}
+/* where the dome meets the ground: a soft glow ring in the mist */
+.dome-rim {
+  --r: 182px;
+  transform: translateZ(2px);
+  background: radial-gradient(
+    closest-side,
+    rgba(120, 235, 255, 0) 80%,
+    rgba(120, 235, 255, 0.35) 93%,
+    rgba(120, 235, 255, 0)
+  );
+}
+/* a soft highlight on the upper front of the glass, facing the camera */
+.dome-shine {
+  position: absolute;
+  left: -46px;
+  top: -24px;
+  width: 92px;
+  height: 48px;
+  border-radius: 50%;
+  transform: translate3d(-62px, 70px, 128px) rotateX(-78deg) rotateZ(-24deg);
+  background: radial-gradient(
+    closest-side,
+    rgba(230, 250, 255, 0.22),
+    rgba(230, 250, 255, 0)
+  );
+  animation: intro-fade 1.2s 1.6s ease-out both;
+}
+
+/* mist: a low fog bank over the radar, built in 3D. Each fog layer is three
+   soft slices stacked at rising heights, so it has volume and parallax as the
+   camera tilts; upright puffs at different distances let the pillars rise
+   through it. Slices and puffs are drawn at half size and scaled up, and
+   everything moves with transforms only. */
+.fog {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  transform-style: preserve-3d;
+  animation: fog-drift var(--t) ease-in-out var(--dl) infinite alternate;
+}
+@keyframes fog-drift {
+  to {
+    transform: translate3d(var(--dx), var(--dy), 0);
+  }
+}
+.slice,
+.puff {
+  position: absolute;
+  animation: intro-fade 2.4s 0.8s ease-out both;
+}
+.slice {
+  left: calc(var(--w) / -2);
+  top: calc(var(--h) / -2);
+  width: var(--w);
+  height: var(--h);
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(160, 215, 255, var(--a)),
+    rgba(160, 215, 255, calc(var(--a) * 0.4)) 55%,
+    rgba(160, 215, 255, 0)
+  );
+  transform: translate3d(var(--ox), var(--oy), var(--z)) scale(var(--s));
+}
+/* each slice higher up is thinner, smaller, and a little offset */
+.sl0 {
+  --a: var(--a0);
+  --z: 4px;
+  --s: 2;
+  --ox: 0px;
+  --oy: 0px;
+}
+.sl1 {
+  --a: calc(var(--a0) * 0.55);
+  --z: 26px;
+  --s: 1.7;
+  --ox: 22px;
+  --oy: -14px;
+}
+.sl2 {
+  --a: calc(var(--a0) * 0.3);
+  --z: 52px;
+  --s: 1.35;
+  --ox: -18px;
+  --oy: 10px;
+}
+.fl1 {
+  --x: -170px;
+  --y: -20px;
+  --w: 300px;
+  --h: 170px;
+  --a0: 0.22;
+  --dx: 80px;
+  --dy: 30px;
+  --t: 26s;
+  --dl: -4s;
+}
+.fl2 {
+  --x: 190px;
+  --y: 40px;
+  --w: 280px;
+  --h: 160px;
+  --a0: 0.2;
+  --dx: -90px;
+  --dy: -24px;
+  --t: 31s;
+  --dl: -17s;
+}
+.fl3 {
+  --x: 0px;
+  --y: 180px;
+  --w: 330px;
+  --h: 140px;
+  --a0: 0.17;
+  --dx: 70px;
+  --dy: -26px;
+  --t: 23s;
+  --dl: -9s;
+}
+.fl4 {
+  --x: -40px;
+  --y: -200px;
+  --w: 340px;
+  --h: 150px;
+  --a0: 0.15;
+  --dx: 60px;
+  --dy: 30px;
+  --t: 35s;
+  --dl: -22s;
+}
+/* puffs stand on the ground facing the camera; three soft lobes each, kept
+   inside the box so no gradient is cut off at an edge */
+.puff {
+  left: calc(var(--x) - var(--w) / 2);
+  top: calc(var(--y) - var(--h));
+  width: var(--w);
+  height: var(--h);
+  transform-origin: 50% 100%;
+  transform: translate3d(0, 0, 0) rotateX(-78deg) scale(2);
+  background:
+    radial-gradient(
+      24% 44% at 28% 54%,
+      rgba(160, 215, 255, var(--a)),
+      rgba(160, 215, 255, 0)
+    ),
+    radial-gradient(
+      30% 48% at 52% 50%,
+      rgba(160, 215, 255, var(--a)),
+      rgba(160, 215, 255, 0)
+    ),
+    radial-gradient(
+      22% 40% at 76% 56%,
+      rgba(160, 215, 255, var(--a)),
+      rgba(160, 215, 255, 0)
+    );
+  animation:
+    intro-fade 2.4s 0.8s ease-out both,
+    puff-drift var(--t) ease-in-out var(--dl) infinite alternate;
+}
+@keyframes puff-drift {
+  to {
+    transform: translate3d(var(--dx), var(--dy), 0) rotateX(-78deg)
+      scale(2.2, 2.1);
+  }
+}
+.pu1 {
+  --x: -250px;
+  --y: 80px;
+  --w: 150px;
+  --h: 52px;
+  --a: 0.2;
+  --dx: 40px;
+  --dy: -10px;
+  --t: 27s;
+  --dl: -6s;
+}
+.pu2 {
+  --x: 250px;
+  --y: 0px;
+  --w: 140px;
+  --h: 48px;
+  --a: 0.18;
+  --dx: -44px;
+  --dy: 12px;
+  --t: 32s;
+  --dl: -19s;
+}
+.pu3 {
+  --x: -110px;
+  --y: 150px;
+  --w: 130px;
+  --h: 42px;
+  --a: 0.16;
+  --dx: 36px;
+  --dy: 8px;
+  --t: 24s;
+  --dl: -11s;
+}
+.pu4 {
+  --x: 120px;
+  --y: 130px;
+  --w: 130px;
+  --h: 44px;
+  --a: 0.16;
+  --dx: -30px;
+  --dy: -10px;
+  --t: 29s;
+  --dl: -3s;
+}
+.pu5 {
+  --x: -60px;
+  --y: -150px;
+  --w: 160px;
+  --h: 52px;
+  --a: 0.13;
+  --dx: 40px;
+  --dy: 10px;
+  --t: 34s;
+  --dl: -25s;
+}
+.pu6 {
+  --x: 170px;
+  --y: -120px;
+  --w: 120px;
+  --h: 42px;
+  --a: 0.13;
+  --dx: -30px;
+  --dy: 8px;
+  --t: 30s;
+  --dl: -14s;
 }
 
 /* threats: violet comets strike the dome, flash, and fizzle out */
@@ -966,19 +1238,7 @@ h3 {
   --bx: 191.6px;
   --by: -345.3px;
   --bz: 203.2px;
-  --d: 8.5s;
-}
-.th3 {
-  --sx: 161.3px;
-  --sy: 230.4px;
-  --sz: 443.4px;
-  --ex: -10px;
-  --ey: 114.6px;
-  --ez: 199.2px;
-  --bx: -155.6px;
-  --by: 223.3px;
-  --bz: 356px;
-  --d: 14.5s;
+  --d: 11.5s;
 }
 .threat,
 .impact {
@@ -1176,23 +1436,23 @@ h3 {
 .mc-l .mc-float {
   --dur: 6.5s;
   --del: -1s;
-  --rot: 5deg;
-  --lift: -18px;
-  --sway: 6px;
+  --rot: 2.5deg;
+  --lift: -9px;
+  --sway: 3px;
 }
 .mc-c .mc-float {
   --dur: 8.5s;
   --del: -3s;
-  --rot: 3deg;
-  --lift: -14px;
-  --sway: -5px;
+  --rot: 1.5deg;
+  --lift: -7px;
+  --sway: -2.5px;
 }
 .mc-r .mc-float {
   --dur: 7.3s;
   --del: -5s;
-  --rot: 6deg;
-  --lift: -20px;
-  --sway: -7px;
+  --rot: 3deg;
+  --lift: -10px;
+  --sway: -3.5px;
 }
 @keyframes mc-float {
   from {
@@ -1322,235 +1582,7 @@ h3 {
   stroke-linejoin: round;
 }
 
-/* outgoing data: plain inside the dome, encrypted at the egress gateway */
-.e1 {
-  --bx: 223.4px;
-  --by: -34.4px;
-  --fx: 650px;
-  --fy: -100px;
-  --d: 3s;
-}
-.e2 {
-  --bx: 191.6px;
-  --by: 119.8px;
-  --fx: 480px;
-  --fy: 300px;
-  --d: 7s;
-}
-.dlp-pkt,
-.dlp-ring,
-.dlp-block {
-  --bx: 204.4px;
-  --by: 96.4px;
-}
-.eg-dot,
-.eg-gate,
-.eg-lock,
-.dlp-pkt,
-.dlp-ring,
-.dlp-block {
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-}
-.eg-dot {
-  width: 10px;
-  height: 10px;
-  margin: -5px 0 0 -5px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff, #4de1ff 55%, #1b6f8c);
-  box-shadow: 0 0 10px #4de1ff;
-  animation: eg-dot 12s var(--d) linear infinite;
-}
-@keyframes eg-dot {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 0, 18px) rotateX(-78deg);
-  }
-  2.33% {
-    opacity: 1;
-  }
-  19.83% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 18px) rotateX(-78deg);
-  }
-  21%,
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 18px) rotateX(-78deg);
-  }
-}
-.eg-gate,
-.dlp-ring {
-  width: 22px;
-  height: 22px;
-  margin: -11px 0 0 -11px;
-  border: 2px solid #bff6ff;
-  border-radius: 50%;
-}
-.eg-gate {
-  animation: eg-gate 12s var(--d) ease-out infinite;
-}
-@keyframes eg-gate {
-  0%,
-  19.25% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 18px) rotateX(-78deg)
-      scale(0.5);
-  }
-  21% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 18px) rotateX(-78deg)
-      scale(0.9);
-  }
-  29.17%,
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 18px) rotateX(-78deg)
-      scale(2.4);
-  }
-}
-.eg-lock,
-.dlp-pkt,
-.dlp-block {
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
-  display: grid;
-  place-items: center;
-  border: 1.5px solid rgba(77, 225, 255, 0.75);
-  border-radius: 8px;
-  background: rgba(8, 14, 34, 0.9);
-  box-shadow: 0 0 12px rgba(77, 225, 255, 0.45);
-}
-.eg-lock svg,
-.dlp-pkt svg,
-.dlp-block svg {
-  width: 15px;
-  height: 15px;
-  fill: none;
-  stroke: var(--cyan);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-.eg-lock {
-  animation: eg-lock 12s var(--d) linear infinite;
-}
-@keyframes eg-lock {
-  0%,
-  19.83% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg)
-      scale(0.6);
-  }
-  22.75% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg) scale(1);
-  }
-  53.67% {
-    opacity: 1;
-    transform: translate3d(var(--fx), var(--fy), 22px) rotateX(-78deg) scale(1);
-  }
-  58.33%,
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--fx), var(--fy), 22px) rotateX(-78deg)
-      scale(0.8);
-  }
-}
-
-/* data leak prevention: sensitive data heading for an unknown destination is stopped */
-.dlp-pkt,
-.dlp-block {
-  border-color: #ffb547;
-  box-shadow: 0 0 14px rgba(255, 181, 71, 0.55);
-}
-.dlp-pkt svg,
-.dlp-block svg {
-  stroke: #ffb547;
-}
-.dlp-block {
-  border-color: #ff6b6b;
-  box-shadow: 0 0 16px rgba(255, 107, 107, 0.6);
-}
-.dlp-block svg {
-  stroke: #ff8a8a;
-  stroke-width: 2.4;
-}
-.dlp-pkt {
-  animation: dlp-pkt 12s 11s ease-in-out infinite;
-}
-@keyframes dlp-pkt {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 0, 22px) rotateX(-78deg);
-  }
-  3.33% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg);
-  }
-  28.33% {
-    opacity: 1;
-    transform: translate3d(calc(var(--bx) * 0.92), calc(var(--by) * 0.92), 22px)
-      rotateX(-78deg);
-  }
-  35%,
-  100% {
-    opacity: 0;
-    transform: translate3d(calc(var(--bx) * 0.92), calc(var(--by) * 0.92), 22px)
-      rotateX(-78deg);
-  }
-}
-.dlp-ring {
-  border-color: #ffb547;
-  animation: dlp-ring 12s 11s ease-out infinite;
-}
-@keyframes dlp-ring {
-  0%,
-  24.17% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg)
-      scale(0.6);
-  }
-  25.83% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg)
-      scale(0.9);
-  }
-  38.33%,
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 22px) rotateX(-78deg)
-      scale(2.8);
-  }
-}
-.dlp-block {
-  animation: dlp-block 12s 11s ease-out infinite;
-}
-@keyframes dlp-block {
-  0%,
-  25% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 40px) rotateX(-78deg)
-      scale(0.6);
-  }
-  27.5%,
-  46.67% {
-    opacity: 1;
-    transform: translate3d(var(--bx), var(--by), 52px) rotateX(-78deg) scale(1);
-  }
-  51.67%,
-  100% {
-    opacity: 0;
-    transform: translate3d(var(--bx), var(--by), 58px) rotateX(-78deg)
-      scale(0.9);
-  }
-}
+/* a denied destination: traffic toward it is blocked by policy */
 .link-deny {
   stroke: rgba(255, 107, 107, 0.45);
   stroke-dasharray: 4 12;
@@ -1731,70 +1763,6 @@ h3 {
       scale(0.9);
   }
 }
-.pl8 {
-  --fz: 62px;
-}
-.pl8 .pf-top::before {
-  animation: flag-top-8 32s 2.6s ease-in-out infinite;
-}
-.pl8 .flag-badge {
-  animation: flag-badge-8 32s 2.6s ease-out infinite;
-}
-.pl8 .fix-badge {
-  animation: fix-badge-8 32s 2.6s ease-out infinite;
-}
-@keyframes flag-top-8 {
-  0%,
-  26.85%,
-  31.63%,
-  100% {
-    opacity: 0;
-  }
-  27.15%,
-  30.43% {
-    opacity: 1;
-  }
-}
-@keyframes flag-badge-8 {
-  0%,
-  27.15% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  27.55%,
-  30.43% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  31.03%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(0.6);
-  }
-}
-@keyframes fix-badge-8 {
-  0%,
-  30.73% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  31.37%,
-  34.96% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  36.21%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 14px)) rotateX(-78deg)
-      scale(0.9);
-  }
-}
 .pl5 {
   --fz: 30px;
 }
@@ -1853,134 +1821,6 @@ h3 {
       scale(1);
   }
   70.05%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 14px)) rotateX(-78deg)
-      scale(0.9);
-  }
-}
-.pl7 {
-  --fz: 30px;
-}
-.pl7 .pf-top::before {
-  animation: flag-top-7 32s 2.6s ease-in-out infinite;
-}
-.pl7 .flag-badge {
-  animation: flag-badge-7 32s 2.6s ease-out infinite;
-}
-.pl7 .fix-badge {
-  animation: fix-badge-7 32s 2.6s ease-out infinite;
-}
-@keyframes flag-top-7 {
-  0%,
-  53.27%,
-  58.05%,
-  100% {
-    opacity: 0;
-  }
-  53.57%,
-  56.85% {
-    opacity: 1;
-  }
-}
-@keyframes flag-badge-7 {
-  0%,
-  53.57% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  53.97%,
-  56.85% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  57.45%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(0.6);
-  }
-}
-@keyframes fix-badge-7 {
-  0%,
-  57.15% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  57.78%,
-  61.38% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  62.63%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 14px)) rotateX(-78deg)
-      scale(0.9);
-  }
-}
-.pl4 {
-  --fz: 62px;
-}
-.pl4 .pf-top::before {
-  animation: flag-top-4 32s 2.6s ease-in-out infinite;
-}
-.pl4 .flag-badge {
-  animation: flag-badge-4 32s 2.6s ease-out infinite;
-}
-.pl4 .fix-badge {
-  animation: fix-badge-4 32s 2.6s ease-out infinite;
-}
-@keyframes flag-top-4 {
-  0%,
-  73.73%,
-  78.51%,
-  100% {
-    opacity: 0;
-  }
-  74.03%,
-  77.31% {
-    opacity: 1;
-  }
-}
-@keyframes flag-badge-4 {
-  0%,
-  74.03% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  74.43%,
-  77.31% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  77.91%,
-  100% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(0.6);
-  }
-}
-@keyframes fix-badge-4 {
-  0%,
-  77.61% {
-    opacity: 0;
-    transform: translateZ(calc(var(--h) + var(--fz) - 6px)) rotateX(-78deg)
-      scale(0.6);
-  }
-  78.24%,
-  81.84% {
-    opacity: 1;
-    transform: translateZ(calc(var(--h) + var(--fz) + 4px)) rotateX(-78deg)
-      scale(1);
-  }
-  83.09%,
   100% {
     opacity: 0;
     transform: translateZ(calc(var(--h) + var(--fz) + 14px)) rotateX(-78deg)
@@ -2082,6 +1922,8 @@ h3 {
   border-radius: 170px 170px 0 0;
   transform-origin: 50% 100%;
   transform: rotateX(-90deg);
+  -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 40%);
+  mask-image: linear-gradient(to top, transparent 8%, #000 40%);
   background: radial-gradient(
     circle 170px at 50% 100%,
     rgba(190, 248, 255, 0) 70%,
@@ -2089,13 +1931,13 @@ h3 {
     rgba(190, 248, 255, 0) 100%
   );
   opacity: 0;
-  animation: dome-flash 6s 3.7s ease-out infinite;
+  animation: dome-flash 9s 3.7s ease-out infinite;
 }
 @keyframes dome-flash {
   0% {
     opacity: 1;
   }
-  15%,
+  10%,
   100% {
     opacity: 0;
   }
@@ -3390,16 +3232,30 @@ h3 {
     margin: 0.5rem 0 0;
     justify-content: center;
   }
-  /* phones and narrow tablets: text on top, the protected region below it */
+  /* phones and narrow tablets: text on top, the protected region below it.
+     script.js slides the scene (--lift) so the region ends just above the
+     status strip, and the scene fades out behind the strip. */
   .world {
     --horizon: 50%;
     --ox: 50%;
     --oy: 40%;
     --k: 0.5;
+    /* --sh is the status strip's height, kept up to date by script.js */
+    --fade: calc(var(--sh, 12rem) - 3rem);
+    -webkit-mask-image: linear-gradient(
+      to top,
+      transparent var(--fade),
+      #000 calc(var(--fade) + 5rem)
+    );
+    mask-image: linear-gradient(
+      to top,
+      transparent var(--fade),
+      #000 calc(var(--fade) + 5rem)
+    );
   }
   .hero-grid {
     align-items: start;
-    padding-block: 2.5rem 21rem;
+    padding-block: 2.5rem 23rem;
   }
   .scrim {
     inset: 0;
@@ -3715,10 +3571,13 @@ h3 {
   .pillar,
   .pf-top,
   .dome-wrap,
-  .dome,
-  .arch,
-  .lat,
-  .dome-glass {
+  .dome-glass,
+  .dome-slice,
+  .dome-rim,
+  .dome-shine,
+  .fog,
+  .slice,
+  .puff {
     animation: none;
   }
   .threat,
@@ -3740,14 +3599,6 @@ h3 {
   .control-plane,
   .cp-beam {
     animation: none;
-  }
-  .eg-dot,
-  .eg-gate,
-  .eg-lock,
-  .dlp-pkt,
-  .dlp-ring,
-  .dlp-block {
-    display: none;
   }
   .tw,
   .pf-top::before,

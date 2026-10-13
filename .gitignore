@@ -1,11 +1,28 @@
+# dependencies and build output
 node_modules/
 dist/
 .astro/
+
+# Cloudflare local dev
+.wrangler/
+
+# environment
 .env
 .env.*
 !.env.example
-.aider*
+
+# logs
+npm-debug.log*
+*.log
+
+# editors and OS
+.vscode/
+.idea/
 .DS_Store
+Thumbs.db
+
+# AI tooling and local design notes
+.aider*
 .claude/
 skills-lock.json
 .impeccable/
