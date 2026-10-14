@@ -1016,13 +1016,15 @@ h3 {
 .dome-rim,
 .dome-shine {
   opacity: 0;
-  animation: shield-reveal 9s 3.55s ease-out infinite;
+  animation: shield-reveal 9s 3.7s ease-out infinite;
 }
+/* starts on the hit itself and snaps to full in under 0.1s, so the dome never
+   shows before the comet lands */
 @keyframes shield-reveal {
   0% {
     opacity: 0;
   }
-  2% {
+  1% {
     opacity: 1;
   }
   8% {
@@ -1501,13 +1503,13 @@ h3 {
       rgba(var(--tint), 0.5) 96%,
       rgba(var(--tint), 0)
     );
-  animation: mc-bubble 27s calc(var(--hit) - 0.15s) ease-out infinite;
+  animation: mc-bubble 27s var(--hit) ease-out infinite;
 }
 @keyframes mc-bubble {
   0% {
     opacity: 0;
   }
-  0.67% {
+  0.33% {
     opacity: 1;
   }
   2.67% {
