@@ -867,7 +867,6 @@ h3 {
   border-radius: 170px 170px 0 0;
   transform-origin: 50% 100%;
   transform: rotateX(-90deg);
-  animation: intro-fade 1.2s 1.4s ease-out both;
   /* the glass is a flat upright half-disc: fade it out toward the ground so
      its straight base and near-vertical sides don't read as a box */
   -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 40%);
@@ -892,7 +891,6 @@ h3 {
   width: calc(var(--r) * 2);
   height: calc(var(--r) * 2);
   border-radius: 50%;
-  animation: intro-fade 1.2s 1.4s ease-out both;
 }
 .dome-slice {
   transform: translateZ(var(--z)) scale(2);
@@ -1008,7 +1006,32 @@ h3 {
     rgba(230, 250, 255, 0.22),
     rgba(230, 250, 255, 0)
   );
-  animation: intro-fade 1.2s 1.6s ease-out both;
+}
+
+/* the shield is invisible until something hits it: every part of the dome
+   flashes in as a comet lands (3.7s, then every 9s), then fades back out.
+   Opacity animates on each leaf, never on the preserve-3d wrap. */
+.dome-glass,
+.dome-slice,
+.dome-rim,
+.dome-shine {
+  opacity: 0;
+  animation: shield-reveal 9s 3.55s ease-out infinite;
+}
+@keyframes shield-reveal {
+  0% {
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  8% {
+    opacity: 0.8;
+  }
+  30%,
+  100% {
+    opacity: 0;
+  }
 }
 
 /* mist: a low fog bank over the radar, built in 3D. Each fog layer is three
@@ -1328,12 +1351,12 @@ h3 {
 
 /* ---------- cloud security layer ---------- */
 
-/* the region: a cloud-shaped boundary drawn on the ground (think VPC) */
+/* the region: a cloud-shaped footprint on the ground. It isn't drawn any more,
+   but script.js still measures it to fit the scene on phones, so it stays as
+   an invisible anchor */
 .region {
-  fill: rgba(77, 225, 255, 0.06);
-  stroke: rgba(77, 225, 255, 0.75);
-  stroke-width: 2.5;
-  stroke-dasharray: 12 9;
+  fill: none;
+  stroke: none;
 }
 
 /* cloud services: glass badges floating above some of the pillars */
@@ -1398,6 +1421,154 @@ h3 {
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-dasharray: 8 10;
+}
+
+/* each cloud has its own invisible bubble shield. The bubble, its comet and
+   the impact ring all sit inside the cloud's .mc-float, so they ride along
+   with its float and hover moves. One cloud is hit every 9s, in turn, halfway
+   between the dome's hits (right 8.2s, left 17.2s, centre 26.2s, each every
+   27s). The bubble is a shaded glass sphere: a bright fresnel rim, a soft
+   highlight up top and a faint reflection underneath. */
+.mc-float {
+  position: relative;
+}
+.mc-l .mc-float {
+  --tint: 120, 240, 210;
+  --w: 184px;
+  --h: 139px;
+  --sx: -285px;
+  --sy: -183px;
+  --hx: 15px;
+  --hy: -3px;
+  --bx: -105px;
+  --by: -113px;
+  --hit: 17.2s;
+}
+.mc-c .mc-float {
+  --tint: 120, 220, 255;
+  --w: 250px;
+  --h: 174px;
+  --sx: -112px;
+  --sy: -322px;
+  --hx: 88px;
+  --hy: -22px;
+  --bx: -2px;
+  --by: -162px;
+  --hit: 26.2s;
+}
+.mc-r .mc-float {
+  --tint: 190, 160, 255;
+  --w: 184px;
+  --h: 139px;
+  --sx: 445px;
+  --sy: -182px;
+  --hx: 145px;
+  --hy: -2.5px;
+  --bx: 265px;
+  --by: -112px;
+  --hit: 8.2s;
+}
+.mc-bubble,
+.mc-threat,
+.mc-impact {
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+.mc-bubble {
+  left: -12px;
+  top: -23px;
+  width: var(--w);
+  height: var(--h);
+  background:
+    radial-gradient(
+      ellipse 30% 18% at 33% 20%,
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0)
+    ),
+    radial-gradient(
+      ellipse 24% 9% at 64% 86%,
+      rgba(var(--tint), 0.3),
+      rgba(var(--tint), 0)
+    ),
+    radial-gradient(
+      closest-side,
+      rgba(var(--tint), 0.03) 50%,
+      rgba(var(--tint), 0.12) 80%,
+      rgba(var(--tint), 0.5) 96%,
+      rgba(var(--tint), 0)
+    );
+  animation: mc-bubble 27s calc(var(--hit) - 0.15s) ease-out infinite;
+}
+@keyframes mc-bubble {
+  0% {
+    opacity: 0;
+  }
+  0.67% {
+    opacity: 1;
+  }
+  2.67% {
+    opacity: 0.8;
+  }
+  10%,
+  100% {
+    opacity: 0;
+  }
+}
+.mc-threat {
+  width: 12px;
+  height: 12px;
+  margin: -6px 0 0 -6px;
+  background: radial-gradient(circle at 35% 30%, #fff, #b18cff 45%, #5a2fb8);
+  box-shadow: 0 0 14px #b18cff;
+  animation: mc-threat 27s calc(var(--hit) - 1.2s) linear infinite;
+}
+@keyframes mc-threat {
+  0% {
+    opacity: 0;
+    transform: translate(var(--sx), var(--sy));
+    animation-timing-function: cubic-bezier(0.5, 0, 0.9, 0.6);
+  }
+  0.67% {
+    opacity: 1;
+  }
+  4.44% {
+    opacity: 1;
+    transform: translate(var(--hx), var(--hy));
+    animation-timing-function: cubic-bezier(0.15, 0.6, 0.35, 1);
+  }
+  7.56%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--bx), var(--by));
+  }
+}
+.mc-impact {
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border: 2px solid #d9c6ff;
+  transform: translate(var(--hx), var(--hy)) scale(0.3);
+  animation: mc-impact 27s calc(var(--hit) - 1.2s) ease-out infinite;
+}
+@keyframes mc-impact {
+  0%,
+  4.33% {
+    opacity: 0;
+    transform: translate(var(--hx), var(--hy)) scale(0.3);
+  }
+  4.55% {
+    opacity: 1;
+    transform: translate(var(--hx), var(--hy)) scale(0.7);
+  }
+  7.56%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--hx), var(--hy)) scale(3.4);
+  }
 }
 
 /* the three main clouds: each floats and rocks on its own, and reacts to hover */
@@ -3581,13 +3752,26 @@ h3 {
     animation: none;
   }
   .threat,
-  .impact {
+  .impact,
+  .mc-threat,
+  .mc-impact {
     display: none;
+  }
+  /* no comets, so keep both shields faintly visible */
+  .dome-glass,
+  .dome-slice,
+  .dome-rim,
+  .dome-shine {
+    animation: none;
+    opacity: 0.6;
+  }
+  .mc-bubble {
+    animation: none;
+    opacity: 0.45;
   }
   .cam {
     transition: none;
   }
-  .region,
   .pillar .pf-top {
     animation: none;
   }
