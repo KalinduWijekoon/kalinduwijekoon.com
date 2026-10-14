@@ -1,6 +1,7 @@
 ---
 import "@fontsource-variable/inter";
 import "@fontsource-variable/sora";
+import { asset } from "../lib/asset";
 ---
 
 <!doctype html>
@@ -17,7 +18,7 @@ import "@fontsource-variable/sora";
     <meta name="color-scheme" content="dark" />
     <title>Page not found | Kalindu Wijekoon</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href={asset("styles.css")} />
   </head>
   <body>
     <div class="site-bg" aria-hidden="true">

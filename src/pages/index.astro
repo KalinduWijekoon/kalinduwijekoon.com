@@ -1,6 +1,7 @@
 ---
 import "@fontsource-variable/inter";
 import "@fontsource-variable/sora";
+import { asset } from "../lib/asset";
 const siteUrl = "https://kalinduwijekoon.com";
 const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
 ---
@@ -36,7 +37,7 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
     <meta name="twitter:card" content="summary_large_image" />
     <title>Kalindu Wijekoon | Cybersecurity Engineer</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href={asset("styles.css")} />
   </head>
   <body>
     <div class="site-bg" aria-hidden="true">
@@ -1312,6 +1313,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
         <a href="#top">Back to top ↑</a>
       </div>
     </footer>
-    <script src="/script.js" defer></script>
+    <script is:inline src={asset("script.js")} defer></script>
   </body>
 </html>

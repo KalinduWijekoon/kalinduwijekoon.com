@@ -1,5 +1,6 @@
 from html.parser import HTMLParser
 from pathlib import Path
+import os
 import sys
 
 
@@ -36,23 +37,61 @@ class SiteParser(HTMLParser):
             self.open_main -= 1
 
 
-index = ROOT / "src" / "pages" / "index.astro"
+class InlineCodeParser(HTMLParser):
+    """Finds inline code that the CSP (script-src/style-src 'self') blocks."""
+
+    def __init__(self):
+        super().__init__()
+        self.found = []
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        if tag == "style":
+            self.found.append("an inline <style> block")
+        if tag == "script" and not values.get("src"):
+            self.found.append("an inline <script> block")
+        if "style" in values:
+            self.found.append(f'a style="" attribute on <{tag}>')
+        for name, _ in attrs:
+            if name.startswith("on"):
+                self.found.append(f"an inline {name}= handler on <{tag}>")
+
+
+pages = sorted((ROOT / "src" / "pages").glob("*.astro"))
 headers = ROOT / "public" / "_headers"
-if not index.exists():
+if not (ROOT / "src" / "pages" / "index.astro").exists():
     errors.append("src/pages/index.astro is missing.")
-else:
+for page in pages:
+    name = page.name
     parser = SiteParser()
-    parser.feed(index.read_text(encoding="utf-8"))
+    parser.feed(page.read_text(encoding="utf-8"))
     if parser.html_lang != "en":
-        errors.append("html lang must be set to en.")
+        errors.append(f"{name}: html lang must be set to en.")
     if not parser.seen_title:
-        errors.append("A title element is required.")
+        errors.append(f"{name}: a title element is required.")
     if not parser.seen_description:
-        errors.append("A non-empty meta description is required.")
+        errors.append(f"{name}: a non-empty meta description is required.")
     if not parser.seen_h1:
-        errors.append("A single primary h1 is required.")
+        errors.append(f"{name}: a single primary h1 is required.")
     if parser.open_main != 0:
-        errors.append("main element is not balanced.")
+        errors.append(f"{name}: main element is not balanced.")
+
+# The CSP blocks inline code without any visible error, so check what the
+# build actually ships (Astro can inline small CSS and scripts on its own).
+dist = ROOT / "dist"
+built = sorted(dist.rglob("*.html")) if dist.exists() else []
+if not built:
+    if os.environ.get("CI"):
+        errors.append("dist/ has no HTML pages; run the build before validating.")
+    else:
+        print("Note: no build in dist/, skipped the inline-code check.")
+for page in built:
+    parser = InlineCodeParser()
+    parser.feed(page.read_text(encoding="utf-8"))
+    for item in sorted(set(parser.found)):
+        errors.append(
+            f"dist/{page.relative_to(dist)} has {item}, which the CSP blocks."
+        )
 
 if not headers.exists():
     errors.append("_headers is missing.")
