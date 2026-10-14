@@ -3318,6 +3318,36 @@ h3 {
   font-size: 0.9375rem;
 }
 
+/* 404 page: one centred block that fills the space between header and footer */
+.notfound {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  min-height: calc(100svh - 10rem);
+  padding-block: 4rem;
+}
+.notfound-code {
+  color: var(--cyan);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.notfound h1 {
+  max-width: 12ch;
+  margin-top: 1rem;
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+.notfound-summary {
+  max-width: 33rem;
+  margin: 1.75rem 0 2.25rem;
+  color: var(--muted);
+  font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+}
+
 /* footer */
 .site-footer {
   border-top: 1px solid var(--line);
