@@ -351,10 +351,68 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
             </div>
           </div>
           <div class="horizon"></div>
-          <div class="scene">
+          <!-- the scene is split into separate 3D contexts that paint in DOM order,
+               back to front. Safari sorts whole planes and can't split ones
+               that cross, so anything that cuts through or drifts past a pillar
+               lives in its own context, or it flickers -->
+          <div class="scene scene-ground">
             <div class="cam">
               <div class="plane">
                 <div class="ground-grid"></div>
+                <div class="city">
+                  <i class="ground-shadow"></i>
+                  <div class="dome-wrap">
+                    <i class="dome-rim"></i>
+                  </div>
+                  <div class="fog fl1">
+                    <i class="slice sl0"></i>
+                    <i class="slice sl1"></i>
+                    <i class="slice sl2"></i>
+                  </div>
+                  <div class="fog fl2">
+                    <i class="slice sl0"></i>
+                    <i class="slice sl1"></i>
+                    <i class="slice sl2"></i>
+                  </div>
+                  <div class="fog fl3">
+                    <i class="slice sl0"></i>
+                    <i class="slice sl1"></i>
+                    <i class="slice sl2"></i>
+                  </div>
+                  <div class="fog fl4">
+                    <i class="slice sl0"></i>
+                    <i class="slice sl1"></i>
+                    <i class="slice sl2"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- the scan beam, over the fog it sweeps through -->
+          <div class="scene scene-scan">
+            <div class="cam">
+              <div class="plane">
+                <div class="city">
+                  <i class="scan"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- mist puffs behind the city -->
+          <div class="scene scene-puffs-back">
+            <div class="cam">
+              <div class="plane">
+                <div class="city">
+                  <i class="puff pu2"></i>
+                  <i class="puff pu5"></i>
+                  <i class="puff pu6"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="scene">
+            <div class="cam">
+              <div class="plane">
                 <svg class="links" viewBox="500 0 2000 700" focusable="false">
                   <path
                     class="region"
@@ -405,8 +463,6 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                   <path class="link" d="M1470 230 L1480 310"></path>
                 </svg>
                 <div class="city">
-                  <i class="ground-shadow"></i>
-                  <i class="scan"></i>
                   <div class="pillar pl1">
                     <i class="pf pf-left"></i>
                     <i class="pf pf-right"></i>
@@ -744,6 +800,27 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- mist puffs in front of the city -->
+          <div class="scene scene-puffs-front">
+            <div class="cam">
+              <div class="plane">
+                <div class="city">
+                  <i class="puff pu1"></i>
+                  <i class="puff pu3"></i>
+                  <i class="puff pu4"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- the shield, drawn over the pillars -->
+          <div class="scene scene-front">
+            <div class="cam">
+              <div class="plane">
+                <div class="city">
                   <div class="dome-wrap">
                     <i class="dome-glass"></i>
                     <i class="dome-flash"></i>
@@ -767,35 +844,17 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
                     <i class="dome-slice ds17"></i>
                     <i class="dome-slice ds18"></i>
                     <i class="dome-slice ds19"></i>
-                    <i class="dome-rim"></i>
                     <i class="dome-shine"></i>
                   </div>
-                  <div class="fog fl1">
-                    <i class="slice sl0"></i>
-                    <i class="slice sl1"></i>
-                    <i class="slice sl2"></i>
-                  </div>
-                  <div class="fog fl2">
-                    <i class="slice sl0"></i>
-                    <i class="slice sl1"></i>
-                    <i class="slice sl2"></i>
-                  </div>
-                  <div class="fog fl3">
-                    <i class="slice sl0"></i>
-                    <i class="slice sl1"></i>
-                    <i class="slice sl2"></i>
-                  </div>
-                  <div class="fog fl4">
-                    <i class="slice sl0"></i>
-                    <i class="slice sl1"></i>
-                    <i class="slice sl2"></i>
-                  </div>
-                  <i class="puff pu1"></i>
-                  <i class="puff pu2"></i>
-                  <i class="puff pu3"></i>
-                  <i class="puff pu4"></i>
-                  <i class="puff pu5"></i>
-                  <i class="puff pu6"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- comets, over the dome they strike -->
+          <div class="scene scene-threats">
+            <div class="cam">
+              <div class="plane">
+                <div class="city">
                   <i class="threat th1"></i>
                   <i class="threat th1 ghost g1"></i>
                   <i class="threat th1 ghost g2"></i>

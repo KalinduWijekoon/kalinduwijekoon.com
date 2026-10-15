@@ -718,11 +718,20 @@ h3 {
   top: calc(var(--y) - 15px);
   width: 30px;
   height: 30px;
+  /* the faces are as tall as --fh, which grows with --rise. Growing the
+     real height (not a squashed scale) keeps Safari repainting the faces as
+     they rise; a scale-in left them rasterised flat, as empty outlines */
+  --fh: calc(var(--h) * var(--rise));
   animation: pillar-rise 1.1s var(--di) cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@property --rise {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
 }
 @keyframes pillar-rise {
   from {
-    transform: scale3d(1, 1, 0.01);
+    --rise: 0.01;
   }
 }
 .pf {
@@ -733,7 +742,7 @@ h3 {
   left: 0;
   top: 30px;
   width: 30px;
-  height: var(--h);
+  height: var(--fh);
   transform-origin: top;
   transform: rotateX(90deg);
   background:
@@ -747,7 +756,7 @@ h3 {
 .pf-left,
 .pf-right {
   top: 0;
-  width: var(--h);
+  width: var(--fh);
   height: 30px;
   transform-origin: left;
   transform: rotateY(-90deg);
@@ -765,7 +774,7 @@ h3 {
 }
 .pf-top {
   inset: 0;
-  transform: translateZ(var(--h));
+  transform: translateZ(var(--fh));
   background: rgba(77, 225, 255, 0.55);
   box-shadow: 0 0 18px rgba(77, 225, 255, 0.65);
 }
@@ -1374,7 +1383,7 @@ h3 {
   border-radius: 9px;
   background: rgba(8, 14, 34, 0.85);
   box-shadow: 0 0 14px rgba(77, 225, 255, 0.35);
-  transform: translateZ(calc(var(--h) + 30px)) rotateX(-78deg);
+  transform: translateZ(calc(var(--fh) + 30px)) rotateX(-78deg);
 }
 .badge3d svg {
   width: 18px;
@@ -1808,6 +1817,12 @@ h3 {
 .fix-badge svg {
   stroke-width: 2.4;
 }
+/* the fix badge takes over from the flag badge on the same spot, and both
+   are briefly visible. Sit it a little nearer the camera so the two aren't
+   coplanar: Safari z-fights coplanar layers, which flickers */
+.fix-badge {
+  translate: 0 3px 0;
+}
 .pl6 {
   --fz: 30px;
 }
@@ -2095,6 +2110,9 @@ h3 {
   border-radius: 170px 170px 0 0;
   transform-origin: 50% 100%;
   transform: rotateX(-90deg);
+  /* just in front of the glass, not coplanar with it: Safari z-fights
+     coplanar layers, and both show on every hit */
+  translate: 0 2px 0;
   -webkit-mask-image: linear-gradient(to top, transparent 8%, #000 40%);
   mask-image: linear-gradient(to top, transparent 8%, #000 40%);
   background: radial-gradient(
