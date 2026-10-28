@@ -82,7 +82,9 @@ if ("IntersectionObserver" in window) {
 
   if (!motionQuery.matches) {
     // Entrances: rows rise in a short stagger.
-    const rise = document.querySelectorAll(".lane, .row, .principle");
+    const rise = document.querySelectorAll(
+      ".lane, .row, .credential, .principle",
+    );
     const riseObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

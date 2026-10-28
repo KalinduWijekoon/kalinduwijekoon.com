@@ -4,6 +4,102 @@ import "@fontsource-variable/sora";
 import { asset } from "../lib/asset";
 const siteUrl = "https://kalinduwijekoon.com";
 const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
+const credlyProfile =
+  "https://www.credly.com/users/kalindu-wijekoon.18665d50/badges";
+// Credly badges, most relevant first; images are self-hosted for the CSP
+const credentials = [
+  {
+    id: "e8a1f9ac-bf10-4fa7-bffb-b45b42354d43",
+    image: "cloud-quest-genai",
+    program: "AWS Cloud Quest",
+    name: "Generative AI Practitioner",
+    year: 2026,
+  },
+  {
+    id: "a8935ad1-e9af-4123-b450-5036062fde3f",
+    image: "cloud-quest-cloud-practitioner",
+    program: "AWS Cloud Quest",
+    name: "Cloud Practitioner",
+    year: 2024,
+  },
+  {
+    id: "3078bbe1-e653-4c08-97aa-39b1a94f8cd3",
+    image: "educate-security",
+    program: "AWS Educate",
+    name: "Getting Started with Security",
+    year: 2023,
+  },
+  {
+    id: "d1368299-7f19-41b6-99dd-fcda448bb937",
+    image: "educate-cloud-ops",
+    program: "AWS Educate",
+    name: "Getting Started with Cloud Ops",
+    year: 2023,
+  },
+  {
+    id: "a01a1d23-88b6-414f-9f32-231316bc5d1b",
+    image: "educate-networking",
+    program: "AWS Educate",
+    name: "Getting Started with Networking",
+    year: 2023,
+  },
+  {
+    id: "36102208-63ff-4e08-8d1d-9bc67e754649",
+    image: "educate-serverless",
+    program: "AWS Educate",
+    name: "Getting Started with Serverless",
+    year: 2023,
+  },
+  {
+    id: "118fdf7d-c69b-4e7f-a82f-c3e8d115bb3c",
+    image: "educate-compute",
+    program: "AWS Educate",
+    name: "Getting Started with Compute",
+    year: 2023,
+  },
+  {
+    id: "e3fe8264-38ff-41fd-8930-2f9f6b1a7e01",
+    image: "educate-storage",
+    program: "AWS Educate",
+    name: "Getting Started with Storage",
+    year: 2023,
+  },
+  {
+    id: "8e7f61a3-13d8-4903-bbb9-a5179a589cd9",
+    image: "educate-databases",
+    program: "AWS Educate",
+    name: "Getting Started with Databases",
+    year: 2023,
+  },
+  {
+    id: "3a7dcb64-b3ff-4a7b-bbbe-f5e6d1893b37",
+    image: "educate-ml-foundations",
+    program: "AWS Educate",
+    name: "Machine Learning Foundations",
+    year: 2023,
+  },
+  {
+    id: "22ebee75-2691-4521-a1a7-0c7329564243",
+    image: "educate-deepracer",
+    program: "AWS Educate",
+    name: "Machine Learning: DeepRacer",
+    year: 2024,
+  },
+  {
+    id: "196a120b-d0ef-42c6-862c-0f325e5027fd",
+    image: "educate-web-builder",
+    program: "AWS Educate",
+    name: "Web Builder",
+    year: 2024,
+  },
+  {
+    id: "b912fd51-ccdd-4962-8f69-af97a2d591bb",
+    image: "educate-cloud-101",
+    program: "AWS Educate",
+    name: "Introduction to Cloud 101",
+    year: 2023,
+  },
+];
 ---
 
 <!doctype html>
@@ -201,6 +297,7 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
         <div class="nav-links" id="nav-links">
           <a href="#focus">Focus</a>
           <a href="#work">Projects</a>
+          <a href="#credentials">Credentials</a>
           <a href="#approach">Approach</a>
           <a class="nav-cta" href="mailto:reach.kalindu@gmail.com">
             Let's connect <span aria-hidden="true">↗</span>
@@ -1305,6 +1402,48 @@ const checks = ["Secrets", "Dependencies", "Infrastructure", "Containers"];
             </li>
           </ol>
         </div>
+      </section>
+
+      <section class="section shell" id="credentials">
+        <div class="section-heading">
+          <h2>Credentials.</h2>
+          <p class="section-intro">
+            Hands-on AWS training across cloud foundations, security, and
+            machine learning. Each badge links to its record on Credly.
+          </p>
+        </div>
+        <ul class="credentials" role="list">
+          {credentials.map((badge) => (
+            <li class="credential">
+              <a
+                class="credential-link"
+                href={`https://www.credly.com/badges/${badge.id}`}
+              >
+                <img
+                  src={`/badges/${badge.image}.png`}
+                  alt=""
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="credential-body">
+                  <span class="credential-kicker">
+                    {badge.program} · {badge.year}
+                  </span>
+                  <span class="credential-name">{badge.name}</span>
+                  <span class="credential-verify">
+                    Verify<span class="sr-only"> on Credly</span>
+                    <span aria-hidden="true">↗</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a class="text-link credentials-all" href={credlyProfile}>
+          All badges on Credly <span aria-hidden="true">↗</span>
+        </a>
       </section>
 
       <section class="section shell" id="approach">

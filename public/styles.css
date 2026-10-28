@@ -3235,6 +3235,78 @@ h3 {
   font-weight: 500;
 }
 
+/* credentials */
+.credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: 1rem;
+}
+.credential {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+.credential:hover,
+.credential:focus-within {
+  border-color: var(--line-strong);
+  background: var(--bg-2);
+}
+.credential-link {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  height: 100%;
+  padding: 1.1rem 1.25rem 1.1rem 1rem;
+  border-radius: inherit;
+}
+.credential-link img {
+  flex: none;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+.credential-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.credential-kicker {
+  color: var(--cyan);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.credential-name {
+  margin-top: 0.15rem;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.credential-verify {
+  margin-top: 0.4rem;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.credential-verify span {
+  display: inline-block;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.credential-link:hover .credential-verify {
+  color: var(--cyan);
+}
+.credential-link:hover .credential-verify span {
+  transform: translate(2px, -2px);
+}
+.credentials-all {
+  margin-top: 1.75rem;
+}
+
 /* approach */
 .approach-grid {
   display: grid;
@@ -3394,7 +3466,8 @@ h3 {
   transition:
     opacity 0.7s ease,
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    background 0.3s ease;
+    background 0.3s ease,
+    border-color 0.3s ease;
 }
 .reveal.is-visible {
   opacity: 1;
@@ -3670,6 +3743,9 @@ h3 {
   .lane,
   .row {
     grid-template-columns: 1fr;
+    break-inside: avoid;
+  }
+  .credential {
     break-inside: avoid;
   }
   .reveal {
