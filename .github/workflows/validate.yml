@@ -12,16 +12,23 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
+      # Actions are pinned to a full commit SHA, not a tag: a tag can be moved
+      # to different code, a commit cannot. Dependabot keeps the pins current.
       - name: Check out repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          # full history, so gitleaks can scan every commit in a push
+          fetch-depth: 0
+          # do not leave the workflow token in .git/config for later steps
+          persist-credentials: false
 
       - name: Set up Python
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
         with:
           python-version: "3.12"
 
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
         with:
           node-version: "24"
           cache: npm
@@ -36,6 +43,6 @@ jobs:
         run: python scripts/validate_site.py
 
       - name: Check for accidentally committed secrets
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,8 @@
+from datetime import datetime, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 import os
+import re
 import sys
 
 
@@ -96,19 +98,92 @@ for page in built:
 if not headers.exists():
     errors.append("_headers is missing.")
 else:
-    header_text = headers.read_text(encoding="utf-8")
-    required_headers = (
-        "Content-Security-Policy:",
-        "X-Content-Type-Options:",
-        "Referrer-Policy:",
-        "Permissions-Policy:",
-    )
-    for required in required_headers:
-        if required not in header_text:
+    # Read "Name: value" lines into a dict, so the checks below look at what
+    # each header is set to and not only at whether its name appears.
+    header_values = {}
+    for line in headers.read_text(encoding="utf-8").splitlines():
+        name, colon, value = line.strip().partition(":")
+        if colon and not name.startswith("#"):
+            header_values.setdefault(name.strip().lower(), value.strip())
+
+    for required in (
+        "Content-Security-Policy",
+        "Strict-Transport-Security",
+        "X-Content-Type-Options",
+        "X-Frame-Options",
+        "Referrer-Policy",
+        "Permissions-Policy",
+    ):
+        if required.lower() not in header_values:
             errors.append(f"Required security header missing: {required}")
 
-for path in (ROOT / "index.html", ROOT / "styles.css", ROOT / "script.js"):
-    if path.exists() and "example.com" in path.read_text(encoding="utf-8"):
+    expected_values = {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+    }
+    for name, expected in expected_values.items():
+        value = header_values.get(name.lower())
+        if value is not None and value != expected:
+            errors.append(f"{name} must be {expected}, found: {value}")
+
+    hsts = header_values.get("strict-transport-security", "")
+    max_age = re.search(r"max-age=(\d+)", hsts)
+    if hsts and (not max_age or int(max_age.group(1)) < 31536000):
+        errors.append("Strict-Transport-Security max-age must be at least a year.")
+
+    # Split the CSP into {directive: [sources]} and reject anything that
+    # would quietly weaken it.
+    csp = {}
+    for part in header_values.get("content-security-policy", "").split(";"):
+        tokens = part.split()
+        if tokens:
+            csp[tokens[0].lower()] = tokens[1:]
+    if csp:
+        unsafe_sources = ("'unsafe-inline'", "'unsafe-eval'", "*", "http:", "https:")
+        for directive, sources in csp.items():
+            for source in sources:
+                if source in unsafe_sources:
+                    errors.append(f"CSP {directive} must not allow {source}.")
+        if "data:" in csp.get("script-src", csp.get("default-src", [])):
+            errors.append("CSP must not allow data: URLs as scripts.")
+        required_directives = {
+            "default-src": ["'self'"],
+            "script-src": ["'self'"],
+            "object-src": ["'none'"],
+            "base-uri": ["'self'"],
+            "frame-ancestors": ["'none'"],
+        }
+        for directive, expected in required_directives.items():
+            if csp.get(directive) != expected:
+                errors.append(
+                    f"CSP {directive} must be exactly: {' '.join(expected)}"
+                )
+
+# security.txt (RFC 9116) must exist, name a contact, and not be expired.
+security_txt = ROOT / "public" / ".well-known" / "security.txt"
+if not security_txt.exists():
+    errors.append("public/.well-known/security.txt is missing.")
+else:
+    fields = {}
+    for line in security_txt.read_text(encoding="utf-8").splitlines():
+        name, colon, value = line.partition(":")
+        if colon and not name.startswith("#"):
+            fields.setdefault(name.strip().lower(), value.strip())
+    if not fields.get("contact"):
+        errors.append("security.txt needs a Contact field.")
+    try:
+        expires = datetime.fromisoformat(fields["expires"].replace("Z", "+00:00"))
+        if expires <= datetime.now(timezone.utc):
+            errors.append("security.txt has expired; set a new Expires date.")
+    except (KeyError, ValueError, TypeError):
+        errors.append("security.txt needs an Expires field with a time zone.")
+
+# No leftover template domains in anything that ships.
+shipped = list(pages)
+for pattern in ("*.js", "*.css", "*.txt", "*.xml"):
+    shipped.extend((ROOT / "public").rglob(pattern))
+for path in shipped:
+    if "example.com" in path.read_text(encoding="utf-8"):
         errors.append(f"Unexpected domain placeholder in {path.name}.")
 
 if errors:

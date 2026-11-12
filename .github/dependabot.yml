@@ -1,0 +1,18 @@
+# Dependabot opens pull requests for outdated or vulnerable dependencies.
+# Each pull request runs the validate workflow before it can be merged.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      # one pull request for routine updates instead of one per package
+      npm-minor-and-patch:
+        update-types: [minor, patch]
+
+  # keeps the commit SHA pins in .github/workflows up to date
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
