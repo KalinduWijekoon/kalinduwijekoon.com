@@ -13,8 +13,8 @@
     "validate": "python3 scripts/validate_site.py"
   },
   "devDependencies": {
-    "astro": "^7.4.8",
-    "prettier": "^3.9.10",
+    "astro": "^7.4.12",
+    "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2"
   },
   "dependencies": {
